@@ -27,9 +27,16 @@ class App extends React.Component {
   }
   
   createLink = () => {
+    this.setCreateLink();
+    this.makeCreateCall();
+  }
+
+  setCreateLink = () => {
     this.setState({createLink: "https://app.okrana.icu/create/" + this.state.id + "/" + this.state.redirect});
     this.setState({getLink: "https://app.okrana.icu/link/" + this.state.id});
-    
+  }
+
+  makeCreateCall = () => {
     let xhr = new XMLHttpRequest();
 
     xhr.open('GET', this.state.createLink);
