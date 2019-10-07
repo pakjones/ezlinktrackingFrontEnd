@@ -76,33 +76,35 @@ class App extends React.Component {
 
 
       return (
-      <div className="container">
+      <div>
         <div className="jumbotron text-center">
           <h1>EZLinktracking.com</h1>
           <p>Easy - Free - Link Tracking</p>
         </div>
-        <div className="row">
-          <div className="col-lg-4">
-            <h1>Create a Link</h1>
-            <span><p>ID(test123):<input id="idInput" type="text" className="form-control" onChange={this.handleIdChange}></input></p></span>
-            <span>Redirect URL(www.google.com):<input id="redirectInput" type="text" className="form-control" onChange={this.handleRedirectChange}></input></span>
-            < br/>
-            <button id="createBtn" className="btn btn-info" onClick={this.createLink}>Create</button>
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-4">
+              <h1>Create a Link</h1>
+              <span><p>ID(test123):<input id="idInput" type="text" className="form-control" onChange={this.handleIdChange}></input></p></span>
+              <span>Redirect URL(www.google.com):<input id="redirectInput" type="text" className="form-control" onChange={this.handleRedirectChange}></input></span>
+              < br/>
+              <button id="createBtn" className="btn btn-info" onClick={this.createLink}>Create</button>
 
-            <p>{ this.state.getLink }</p>
-          </div>
+              <p>{ this.state.getLink }</p>
+            </div>
 
-          <div className="col-lg-4">
-            <h1>Check an existing link</h1>
-            <p>Link ID:</p><input type="text" className="form-control" onChange={this.handleCheckIdChange}></input>
-            < br/>
-            <button id="checkBtn" className="btn btn-success" onClick={this.checkLink}>Check</button>
-            < br/>
-            < br/>
-            
-            <List clicks={this.state.clicks} />
+            <div className="col-lg-4">
+              <h1>Check an existing link</h1>
+              <p>Link ID:</p><input type="text" className="form-control" onChange={this.handleCheckIdChange}></input>
+              < br/>
+              <button id="checkBtn" className="btn btn-success" onClick={this.checkLink}>Check</button>
+              < br/>
+              < br/>
+              
+              <List clicks={this.state.clicks} />
+            </div>
           </div>
-        </div>
+          </div>
       </div>
       );
   }
