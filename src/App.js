@@ -81,26 +81,27 @@ class App extends React.Component {
           <h1>EZLinktracking.com</h1>
           <p>Easy - Free - Link Tracking</p>
         </div>
-        <h1>Create a Link</h1>
-        <span><p>ID(test123):<input id="idInput" onChange={this.handleIdChange}></input></p></span>
-        <span>Redirect URL(www.google.com):<input id="redirectInput" onChange={this.handleRedirectChange}></input></span>
-        < br/>
-        <button id="createBtn" onClick={this.createLink}>Create</button>
+        <div className="col-sm-4">
+          <h1>Create a Link</h1>
+          <span><p>ID(test123):<input id="idInput" type="text" className="form-control" onChange={this.handleIdChange}></input></p></span>
+          <span>Redirect URL(www.google.com):<input id="redirectInput" onChange={this.handleRedirectChange}></input></span>
+          < br/>
+          <button id="createBtn" className="btn btn-info" onClick={this.createLink}>Create</button>
 
-        <p>{ this.state.getLink }</p>
+          <p>{ this.state.getLink }</p>
+        </div>
 
-        < br/>
-        < br/>
-        < br/>
-
-        <h1>Check an existing link</h1>
-        <p>Link ID:</p><input onChange={this.handleCheckIdChange}></input>
-        < br/>
-        <button id="checkBtn" onClick={this.checkLink}>Check</button>
-        < br/>
-        < br/>
+        <div className="col-sm-4">
+          <h1>Check an existing link</h1>
+          <p>Link ID:</p><input type="text" className="form-control" onChange={this.handleCheckIdChange}></input>
+          < br/>
+          <button id="checkBtn" className="btn btn-success" onClick={this.checkLink}>Check</button>
+          < br/>
+          < br/>
+          
+          <List clicks={this.state.clicks} />
+        </div>
         
-        <List clicks={this.state.clicks} />
       </div>
       );
   }
