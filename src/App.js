@@ -73,8 +73,14 @@ class App extends React.Component {
   }
 
   render() {
+
+
       return (
       <div className="App">
+        <div className="jumbotron text-center">
+          <h1>EZLinktracking.com</h1>
+          <p>Easy - Free - Link Tracking</p>
+        </div>
         <h1>Create a Link</h1>
         <span><p>ID(test123):<input id="idInput" onChange={this.handleIdChange}></input></p></span>
         <span>Redirect URL(www.google.com):<input id="redirectInput" onChange={this.handleRedirectChange}></input></span>
