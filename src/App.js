@@ -40,7 +40,7 @@ class App extends React.Component {
   makeCreateCall = () => {
     let xhr = new XMLHttpRequest();
 
-    xhr.open('GET', this.state.createLink);
+    xhr.open('GET', this.state.id);
     xhr.send();
   }
 
