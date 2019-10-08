@@ -75,6 +75,13 @@ class App extends React.Component {
 
   render() {
 
+    let createBtnStyle = () => {
+      if (this.state.id === null) {
+        return "btn btn-info disabled";
+      } else {
+        return "btn btn-info";
+      }
+    };
 
       return (
       <div>
@@ -89,7 +96,7 @@ class App extends React.Component {
               <span><p>ID(test123):<input id="idInput" type="text" className="form-control" onChange={this.handleIdChange}></input></p></span>
               <span>Redirect URL(www.google.com):<input id="redirectInput" type="text" className="form-control" onChange={this.handleRedirectChange}></input></span>
               < br/>
-              <button id="createBtn" className="btn btn-info" onClick={this.createLink}>Create</button>
+              <button id="createBtn" className={createBtnStyle} onClick={this.createLink}>Create</button>
 
               <p>{ this.state.getLink }</p>
             </div>
