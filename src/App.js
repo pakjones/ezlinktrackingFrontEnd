@@ -16,11 +16,13 @@ class App extends React.Component {
   }
 
   handleIdChange = (e) => {
-    this.setState({id: "https://app.okrana.icu/create/" + e.target.value + "/" + this.state.redirect});
-    this.setState({getLink: "https://app.okrana.icu/link/" + e.target.value});
+    this.setState({id: e.target.value});
+    
   }
   handleRedirectChange = (e) => {
     this.setState({redirect: e.target.value});
+    this.setState({createLink: "https://app.okrana.icu/create/" + this.state.id + "/" + this.state.redirect})
+    this.setState({getLink: "https://app.okrana.icu/link/" + this.state.id});
   }
 
   handleCheckIdChange = (e) => {
@@ -40,7 +42,7 @@ class App extends React.Component {
   makeCreateCall = () => {
     let xhr = new XMLHttpRequest();
 
-    xhr.open('GET', this.state.id);
+    xhr.open('GET', this.state.createLink);
     xhr.send();
   }
 
