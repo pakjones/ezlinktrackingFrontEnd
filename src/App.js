@@ -105,8 +105,12 @@ class App extends React.Component {
 
             <div className="col-lg-4">
               <h1>Check a link</h1>
-              <p>Link ID:</p><input type="text" className="form-control" onChange={this.handleCheckIdChange}></input>
+              <span><p>Link ID:<input type="text" className="form-control" onChange={this.handleCheckIdChange}></input></p></span>
+              
               < br/>
+              < br/>
+              < br/>
+
               <button id="checkBtn" className="btn btn-success" onClick={this.checkLink}>Check</button>
               < br/>
               < br/>
