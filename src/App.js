@@ -16,7 +16,8 @@ class App extends React.Component {
   }
 
   handleIdChange = (e) => {
-    this.setState({id: e.target.value});
+    this.setState({id: "https://app.okrana.icu/create/" + e.target.value + "/" + this.state.redirect});
+    this.setState({getLink: "https://app.okrana.icu/link/" + e.target.value});
   }
   handleRedirectChange = (e) => {
     this.setState({redirect: e.target.value});
@@ -32,8 +33,8 @@ class App extends React.Component {
   }
 
   setCreateLink = () => {
-    this.setState({createLink: "https://app.okrana.icu/create/" + this.state.id + "/" + this.state.redirect});
-    this.setState({getLink: "https://app.okrana.icu/link/" + this.state.id});
+    /*this.setState({createLink: "https://app.okrana.icu/create/" + this.state.id + "/" + this.state.redirect});
+    this.setState({getLink: "https://app.okrana.icu/link/" + this.state.id});*/
   }
 
   makeCreateCall = () => {
