@@ -104,7 +104,7 @@ class App extends React.Component {
             </div>
 
             <div className="col-lg-4">
-              <h1>Check an existing link</h1>
+              <h1>Check a link</h1>
               <p>Link ID:</p><input type="text" className="form-control" onChange={this.handleCheckIdChange}></input>
               < br/>
               <button id="checkBtn" className="btn btn-success" onClick={this.checkLink}>Check</button>
@@ -112,6 +112,11 @@ class App extends React.Component {
               < br/>
               
               <List clicks={this.state.clicks} />
+            </div>
+            <div className="col-lg-4">
+              <div>
+
+              </div>
             </div>
           </div>
           </div>
