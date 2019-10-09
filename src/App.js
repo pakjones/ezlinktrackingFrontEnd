@@ -40,7 +40,7 @@ class App extends React.Component {
 
   checkForDisplay = () => {
     if (this.state.display === true) {
-      return <div><h3>{this.state.getLink}</h3><button onClick={this.copyLink}>Copy</button></div>;
+      return <div><h3>{this.state.getLink}</h3><button className="btn btn-primary" onClick={this.copyLink}>Copy</button></div>;
     }
   }
 
