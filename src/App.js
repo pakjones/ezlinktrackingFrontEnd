@@ -110,7 +110,7 @@ class App extends React.Component {
               < br/>
               <button id="createBtn" className={createBtnStyle()} onClick={this.createLink}>Create</button>
 
-              <p>{ this.checkForDisplay }</p>
+              <p>{ this.checkForDisplay() }</p>
             </div>
 
             <div className="col-lg-4">
