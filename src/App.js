@@ -40,8 +40,17 @@ class App extends React.Component {
 
   checkForDisplay = () => {
     if (this.state.display === true) {
-      return this.state.getLink;
+      return <div><h3>{this.state.getLink}</h3><button onClick={this.copyLink}>Copy</button></div>;
     }
+  }
+
+  copyLink = () => {
+    let dummy = document.createElement("textarea");
+    document.body.appendChild(dummy);
+    dummy.value = this.state.getLink;
+    dummy.select();
+    document.execCommand("copy");
+    document.body.removeChild(dummy);
   }
 
   setCreateLink = () => {
