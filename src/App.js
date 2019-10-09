@@ -12,6 +12,7 @@ class App extends React.Component {
       getLink: "",
       checkId: "",
       clicks: [],
+      display: false
     };
   }
 
@@ -23,15 +24,24 @@ class App extends React.Component {
     await this.setState({redirect: e.target.value});
     await this.setState({createLink: "https://app.okrana.icu/create/" + this.state.id + "/" + this.state.redirect})
     await this.setState({getLink: "https://app.okrana.icu/link/" + this.state.id});
+    this.setState({display: false});
   }
 
   handleCheckIdChange = (e) => {
     this.setState({checkId: e.target.value});
+    this.setState({display: false});
   }
   
   createLink = () => {
+    this.setState({display: true});
     this.setCreateLink();
     this.makeCreateCall();
+  }
+
+  checkForDisplay = () => {
+    if (this.state.display === true) {
+      return this.state.getLink;
+    }
   }
 
   setCreateLink = () => {
@@ -100,7 +110,7 @@ class App extends React.Component {
               < br/>
               <button id="createBtn" className={createBtnStyle()} onClick={this.createLink}>Create</button>
 
-              <p>{ this.state.getLink }</p>
+              <p>{ this.checkForDisplay }</p>
             </div>
 
             <div className="col-lg-4">
