@@ -19,23 +19,23 @@ class App extends React.Component {
   }
 
   handleIdChange = (e) => {
-    this.setState({id: e.target.value});
-    
+    this.setState({ id: e.target.value });
+    this.setState({ display: false });
+    this.setCreateLink();
   }
   handleRedirectChange = async (e) => {
-    await this.setState({redirect: e.target.value});
-    await this.setState({createLink: "http://app.okrana.icu/link"})
-    await this.setState({getLink: "http://app.okrana.icu/link/" + this.state.id});
-    this.setState({display: false});
+    await this.setState({ redirect: e.target.value });
+    await this.setState({ createLink: "http://app.okrana.icu/link" })
+    await this.setState({ getLink: "http://app.okrana.icu/link/" + this.state.id });
+    this.setState({ display: false });
   }
 
   handleCheckIdChange = (e) => {
-    this.setState({checkId: e.target.value});
-    this.setState({display: false});
+    this.setState({ checkId: e.target.value });
   }
-  
+
   createLink = () => {
-    this.setState({display: true});
+    this.setState({ display: true });
     this.setCreateLink();
     this.makeCreateCall();
   }
@@ -56,8 +56,8 @@ class App extends React.Component {
   }
 
   setCreateLink = () => {
-    /*this.setState({createLink: "https://app.okrana.icu/create/" + this.state.id + "/" + this.state.redirect});
-    this.setState({getLink: "https://app.okrana.icu/link/" + this.state.id});*/
+    this.setState({ createLink: "https://app.okrana.icu/link/" + this.state.id });
+    this.setState({ getLink: "https://app.okrana.icu/link/" + this.state.id });
   }
 
   makeCreateCall = () => {
@@ -79,14 +79,13 @@ class App extends React.Component {
         let clicks = [];
         console.log(data);
         if (data) {
-            for (let i = 0; i < data.length; i++) {
-              clicks.push(data[i].dateTime);
-            }
-          
+          for (let i = 0; i < data.length; i++) {
+            clicks.push(data[i].dateTime);
+          }
+
 
         }
-        this.setState({clicks: clicks});
-        this.setState({display: true});
+        this.setState({ clicks: clicks });
 
         //this.setState({linkStats: xhr.response});
       }
@@ -99,10 +98,10 @@ class App extends React.Component {
   }
 
   setPage0 = () => {
-    this.setState({page: 0});
+    this.setState({ page: 0 });
   }
   setPage1 = () => {
-    this.setState({page: 1});
+    this.setState({ page: 1 });
   }
 
   render() {
@@ -118,12 +117,12 @@ class App extends React.Component {
       return (
         <div>
           <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
-              
-              <ul className="navbar-nav">
-                <li className="nav-item active"><a className="nav-link" onClick={this.setPage0}>Home</a></li>
-                <li className="nav-item"><a className="nav-link" onClick={this.setPage1}>Info</a></li>
-              </ul>
-            
+
+            <ul className="navbar-nav">
+              <li className="nav-item active"><a className="nav-link" onClick={this.setPage0}>Home</a></li>
+              <li className="nav-item"><a className="nav-link" onClick={this.setPage1}>Info</a></li>
+            </ul>
+
           </nav>
           <div className="jumbotron text-center">
             <h1>EZLinktracking.com</h1>
@@ -135,47 +134,47 @@ class App extends React.Component {
                 <h1>Create a Link</h1>
                 <span><p>ID(test123):<input id="idInput" type="text" className="form-control" onChange={this.handleIdChange}></input></p></span>
                 <span>Redirect URL(www.google.com):<input id="redirectInput" type="text" className="form-control" onChange={this.handleRedirectChange}></input></span>
-                < br/>
+                < br />
                 <button id="createBtn" className={createBtnStyle()} onClick={this.createLink}>Create</button>
-  
-                <div>{ this.checkForDisplay() }</div>
+
+                <div>{this.checkForDisplay()}</div>
               </div>
-  
+
               <div className="col-lg-4">
                 <h1>Check a link</h1>
                 <span><p>Link ID:<input type="text" className="form-control" onChange={this.handleCheckIdChange}></input></p></span>
-  
+
                 <button id="checkBtn" className="btn btn-success" onClick={this.checkLink}>Check</button>
-                < br/>
-                < br/>
-                
+                < br />
+                < br />
+
                 <List clicks={this.state.clicks} />
               </div>
               <div className="col-lg-4">
                 <div>
-                
+
                 </div>
               </div>
             </div>
-            </div>
+          </div>
         </div>
-        );
+      );
     } else if (this.state.page === 1) {
       return (
         <div>
           <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
-              
-              <ul className="navbar-nav">
-                <li className="nav-item"><a className="nav-link" onClick={this.setPage0}>Home</a></li>
-                <li className="nav-item active"><a className="nav-link" onClick={this.setPage1}>Info</a></li>
-              </ul>
-            
+
+            <ul className="navbar-nav">
+              <li className="nav-item"><a className="nav-link" onClick={this.setPage0}>Home</a></li>
+              <li className="nav-item active"><a className="nav-link" onClick={this.setPage1}>Info</a></li>
+            </ul>
+
           </nav>
           <Docs />
         </div>
       );
     }
-      
+
   }
 }
 
