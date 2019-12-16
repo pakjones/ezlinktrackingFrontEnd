@@ -12,7 +12,7 @@ class List extends React.Component {
       if (this.props.clicks) {
         for (let i = 0; i < this.props.clicks.length; i++) {
           array.push(
-            <li>{this.props.clicks[i]}</li>
+            <li key={i.toString()}>{this.props.clicks[i]}</li>
           );
         }
       }

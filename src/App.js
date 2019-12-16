@@ -12,35 +12,36 @@ class App extends React.Component {
       getLink: "",
       checkId: "",
       clicks: [],
-      display: false
+      display: false,
+      page: 0
     };
   }
 
   handleIdChange = (e) => {
-    this.setState({ id: e.target.value });
-
+    this.setState({id: e.target.value});
+    
   }
   handleRedirectChange = async (e) => {
-    await this.setState({ redirect: e.target.value });
-    await this.setState({ createLink: "https://app.okrana.icu/create/" + this.state.id + "/" + this.state.redirect })
-    await this.setState({ getLink: "https://app.okrana.icu/link/" + this.state.id });
-    this.setState({ display: false });
+    await this.setState({redirect: e.target.value});
+    await this.setState({createLink: "https://app.okrana.icu/create/" + this.state.id + "/" + this.state.redirect})
+    await this.setState({getLink: "https://app.okrana.icu/link/" + this.state.id});
+    this.setState({display: false});
   }
 
   handleCheckIdChange = (e) => {
-    this.setState({ checkId: e.target.value });
-    this.setState({ display: false });
+    this.setState({checkId: e.target.value});
+    this.setState({display: false});
   }
-
+  
   createLink = () => {
-    this.setState({ display: true });
+    this.setState({display: true});
     this.setCreateLink();
     this.makeCreateCall();
   }
 
   checkForDisplay = () => {
     if (this.state.display === true) {
-      return <div><p>{this.state.getLink}</p><button className="btn btn-primary" onClick={this.copyLink}>Copy</button></div>;
+      return <div><h3>{this.state.getLink}</h3><button className="btn btn-primary" onClick={this.copyLink}>Copy</button></div>;
     }
   }
 
@@ -67,6 +68,7 @@ class App extends React.Component {
 
   checkLink = () => {
     let xhr = new XMLHttpRequest();
+
     xhr.onreadystatechange = () => {
       if (xhr.readyState === XMLHttpRequest.DONE) {
         let json = xhr.response;
@@ -78,20 +80,27 @@ class App extends React.Component {
             for (let i = 0; i < data[0].newClicks.length; i++) {
               clicks.push(data[0].newClicks[i].time);
             }
-
+            
           }
         }
-        this.setState({ clicks: clicks });
-
+        this.setState({clicks: clicks});
+        this.setState({display: true});
 
         //this.setState({linkStats: xhr.response});
       }
     }
 
-    let url = "https://app.okrana.icu/stats/" + this.state.checkId;
+    let url = "https://app.okrana.icu/stats/all/" + this.state.checkId;
 
     xhr.open('GET', url);
     xhr.send();
+  }
+
+  setPage0 = () => {
+    this.setState({page: 0});
+  }
+  setPage1 = () => {
+    this.setState({page: 1});
   }
 
   render() {
@@ -103,44 +112,77 @@ class App extends React.Component {
         return "btn btn-info";
       }
     };
-
-    return (
-      <div>
-        <div className="jumbotron text-center">
-          <h1>EZLinktracking.com</h1>
-          <p>Easy - Free - Link Tracking</p>
-        </div>
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-4">
-              <h1>Create a Link</h1>
-              <span><p>ID(test123):<input id="idInput" type="text" className="form-control" onChange={this.handleIdChange}></input></p></span>
-              <span>Redirect URL(www.google.com):<input id="redirectInput" type="text" className="form-control" onChange={this.handleRedirectChange}></input></span>
-              < br />
-              <button id="createBtn" className={createBtnStyle()} onClick={this.createLink}>Create</button>
-
-              <p>{this.checkForDisplay()}</p>
-            </div>
-
-            <div className="col-lg-4">
-              <h1>Check a link</h1>
-              <span><p>Link ID:<input type="text" className="form-control" onChange={this.handleCheckIdChange}></input></p></span>
-
-              <button id="checkBtn" className="btn btn-success" onClick={this.checkLink}>Check</button>
-              < br />
-              < br />
-
-              <List clicks={this.state.clicks} />
-            </div>
-            <div className="col-lg-4">
-              <div>
-
+    if (this.state.page === 0) {
+      return (
+        <div>
+          <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
+              
+              <ul className="navbar-nav">
+                <li className="nav-item active"><a className="nav-link" onClick={this.setPage0}>Home</a></li>
+                <li className="nav-item"><a className="nav-link" onClick={this.setPage1}>Route Docs</a></li>
+              </ul>
+            
+          </nav>
+          <div className="jumbotron text-center">
+            <h1>EZLinktracking.com</h1>
+            <p>Easy - Free - Link Tracking</p>
+          </div>
+          <div className="container">
+            <div className="row">
+              <div className="col-lg-4">
+                <h1>Create a Link</h1>
+                <span><p>ID(test123):<input id="idInput" type="text" className="form-control" onChange={this.handleIdChange}></input></p></span>
+                <span>Redirect URL(www.google.com):<input id="redirectInput" type="text" className="form-control" onChange={this.handleRedirectChange}></input></span>
+                < br/>
+                <button id="createBtn" className={createBtnStyle()} onClick={this.createLink}>Create</button>
+  
+                <div>{ this.checkForDisplay() }</div>
+              </div>
+  
+              <div className="col-lg-4">
+                <h1>Check a link</h1>
+                <span><p>Link ID:<input type="text" className="form-control" onChange={this.handleCheckIdChange}></input></p></span>
+  
+                <button id="checkBtn" className="btn btn-success" onClick={this.checkLink}>Check</button>
+                < br/>
+                < br/>
+                
+                <List clicks={this.state.clicks} />
+              </div>
+              <div className="col-lg-4">
+                <div>
+                
+                </div>
               </div>
             </div>
-          </div>
+            </div>
         </div>
-      </div>
-    );
+        );
+    } else if (this.state.page === 1) {
+      return (
+        <div>
+          <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
+              
+              <ul className="navbar-nav">
+                <li className="nav-item"><a className="nav-link" onClick={this.setPage0}>Home</a></li>
+                <li className="nav-item active"><a className="nav-link" onClick={this.setPage1}>Route Docs</a></li>
+              </ul>
+            
+          </nav>
+          <h1>Documentation</h1>
+          <h3>Create Link</h3>
+          <p>app.okrana.icu/create/-ID-/-redirectURL-</p>
+          <h3>Access Link</h3>
+          <p>app.okrana.icu/link/-ID-</p>
+          <h3>Stats of Link</h3>
+          <p>Get all clicks - app.okrana.icu/stats/all/-ID-</p>
+          <p>Get total clicks - app.okrana.icu/stats/total/-ID-</p>
+          <h3>Logs</h3>
+          <p>app.okrana.icu/logs</p>
+        </div>
+      );
+    }
+      
   }
 }
 
