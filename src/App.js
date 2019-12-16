@@ -1,5 +1,6 @@
 import React from 'react';
-import List from './list.js';
+import List from './components/list';
+import Docs from './components/Docs';
 
 
 class App extends React.Component {
@@ -23,8 +24,8 @@ class App extends React.Component {
   }
   handleRedirectChange = async (e) => {
     await this.setState({redirect: e.target.value});
-    await this.setState({createLink: "https://app.okrana.icu/create/" + this.state.id + "/" + this.state.redirect})
-    await this.setState({getLink: "https://app.okrana.icu/link/" + this.state.id});
+    await this.setState({createLink: "http://app.okrana.icu/link"})
+    await this.setState({getLink: "http://app.okrana.icu/link/" + this.state.id});
     this.setState({display: false});
   }
 
@@ -41,7 +42,7 @@ class App extends React.Component {
 
   checkForDisplay = () => {
     if (this.state.display === true) {
-      return <div><h3>{this.state.getLink}</h3><button className="btn btn-primary" onClick={this.copyLink}>Copy</button></div>;
+      return <div><br /><h5>{this.state.getLink}</h5><button className="btn btn-primary" onClick={this.copyLink}>Copy</button></div>;
     }
   }
 
@@ -62,8 +63,9 @@ class App extends React.Component {
   makeCreateCall = () => {
     let xhr = new XMLHttpRequest();
 
-    xhr.open('GET', this.state.createLink);
-    xhr.send();
+    xhr.open('POST', this.state.createLink);
+    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhr.send(JSON.stringify({ "id": this.state.id, "redirect": this.state.redirect }));
   }
 
   checkLink = () => {
@@ -75,13 +77,13 @@ class App extends React.Component {
 
         let data = JSON.parse(json);
         let clicks = [];
-        if (data[0]) {
-          if (data[0].newClicks) {
-            for (let i = 0; i < data[0].newClicks.length; i++) {
-              clicks.push(data[0].newClicks[i].time);
+        console.log(data);
+        if (data) {
+            for (let i = 0; i < data.length; i++) {
+              clicks.push(data[i].dateTime);
             }
-            
-          }
+          
+
         }
         this.setState({clicks: clicks});
         this.setState({display: true});
@@ -90,7 +92,7 @@ class App extends React.Component {
       }
     }
 
-    let url = "https://app.okrana.icu/stats/all/" + this.state.checkId;
+    let url = 'http://app.okrana.icu/stats/' + this.state.checkId;
 
     xhr.open('GET', url);
     xhr.send();
@@ -119,7 +121,7 @@ class App extends React.Component {
               
               <ul className="navbar-nav">
                 <li className="nav-item active"><a className="nav-link" onClick={this.setPage0}>Home</a></li>
-                <li className="nav-item"><a className="nav-link" onClick={this.setPage1}>Route Docs</a></li>
+                <li className="nav-item"><a className="nav-link" onClick={this.setPage1}>Info</a></li>
               </ul>
             
           </nav>
@@ -165,20 +167,11 @@ class App extends React.Component {
               
               <ul className="navbar-nav">
                 <li className="nav-item"><a className="nav-link" onClick={this.setPage0}>Home</a></li>
-                <li className="nav-item active"><a className="nav-link" onClick={this.setPage1}>Route Docs</a></li>
+                <li className="nav-item active"><a className="nav-link" onClick={this.setPage1}>Info</a></li>
               </ul>
             
           </nav>
-          <h1>Documentation</h1>
-          <h3>Create Link</h3>
-          <p>app.okrana.icu/create/-ID-/-redirectURL-</p>
-          <h3>Access Link</h3>
-          <p>app.okrana.icu/link/-ID-</p>
-          <h3>Stats of Link</h3>
-          <p>Get all clicks - app.okrana.icu/stats/all/-ID-</p>
-          <p>Get total clicks - app.okrana.icu/stats/total/-ID-</p>
-          <h3>Logs</h3>
-          <p>app.okrana.icu/logs</p>
+          <Docs />
         </div>
       );
     }
