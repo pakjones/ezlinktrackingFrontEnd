@@ -19,12 +19,12 @@ class App extends React.Component {
   }
 
   handleIdChange = (e) => {
-    this.setState({ id: e.target.value });
+    this.setState({ id: e.target.value.trim() });
     this.setState({ display: false });
     this.setCreateLink();
   }
   handleRedirectChange = async (e) => {
-    await this.setState({ redirect: e.target.value });
+    await this.setState({ redirect: e.target.value.trim() });
     await this.setState({ createLink: "http://app.okrana.icu/link" })
     await this.setState({ getLink: "http://app.okrana.icu/link/" + this.state.id });
     this.setState({ display: false });
