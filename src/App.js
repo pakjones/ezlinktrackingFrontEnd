@@ -56,7 +56,7 @@ class App extends React.Component {
   }
 
   setCreateLink = () => {
-    this.setState({ createLink: "https://app.okrana.icu/link/" + this.state.id });
+    this.setState({ createLink: "https://app.okrana.icu/link/" });
     this.setState({ getLink: "https://app.okrana.icu/link/" + this.state.id });
   }
 
