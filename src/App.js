@@ -1,6 +1,8 @@
 import React from 'react';
 import List from './components/list';
 import Docs from './components/Docs';
+import Forms from './components/Forms';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 class App extends React.Component {
@@ -103,6 +105,9 @@ class App extends React.Component {
   setPage1 = () => {
     this.setState({ page: 1 });
   }
+  setPage2 = () => {
+    this.setState({ page: 2 });
+  }
 
   render() {
 
@@ -120,6 +125,7 @@ class App extends React.Component {
 
             <ul className="navbar-nav">
               <li className="nav-item active"><a className="nav-link" onClick={this.setPage0}>Home</a></li>
+              <li className="nav-item"><a className="nav-link" onClick={this.setPage2}>Forms</a></li>
               <li className="nav-item"><a className="nav-link" onClick={this.setPage1}>Info</a></li>
             </ul>
 
@@ -166,6 +172,7 @@ class App extends React.Component {
 
             <ul className="navbar-nav">
               <li className="nav-item"><a className="nav-link" onClick={this.setPage0}>Home</a></li>
+              <li className="nav-item"><a className="nav-link" onClick={this.setPage2}>Forms</a></li>
               <li className="nav-item active"><a className="nav-link" onClick={this.setPage1}>Info</a></li>
             </ul>
 
@@ -173,6 +180,20 @@ class App extends React.Component {
           <Docs />
         </div>
       );
+    } else if (this.state.page === 2) {
+      return (
+        <div>
+          <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
+            <ul className="navbar-nav">
+              <li className="nav-item"><a className="nav-link" onClick={this.setPage0}>Home</a></li>
+              <li className="nav-item active"><a className="nav-link" onClick={this.setPage2}>Forms</a></li>
+              <li className="nav-item"><a className="nav-link" onClick={this.setPage1}>Info</a></li>
+            </ul>
+
+          </nav>
+          <Forms />
+        </div>
+      )
     }
 
   }
