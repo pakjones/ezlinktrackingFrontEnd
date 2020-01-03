@@ -1,15 +1,11 @@
 import React from 'react';
-import Field from './Field';
+import FieldPreview from './FieldPreview';
 
-class Fields extends React.Component {
+class FieldsPreview extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
         };
-    }
-
-    updateFields = (payload) => {
-        this.props.updateFields(payload);
     }
 
     render() {
@@ -17,10 +13,10 @@ class Fields extends React.Component {
             console.log(this.props.fields.length);
             let array = [];
             for (let i = 0; i < this.props.fields.length; i++) {
-                array.push(<Field field={this.props.fields[i]} key={i} index={i} update={this.updateFields} />);
+                array.push(<FieldPreview field={this.props.fields[i]} key={i} index={i} />);
             }
             return (
-                <ul id="fieldsList" style={{ paddingLeft: "0px" }}>
+                <ul id="fieldsList">
                     {array}
                 </ul>
             )
@@ -34,4 +30,4 @@ class Fields extends React.Component {
     }
 }
 
-export default Fields;
+export default FieldsPreview;
