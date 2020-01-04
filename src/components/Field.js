@@ -71,7 +71,9 @@ class Field extends React.Component {
                     value: 100
                 }
                 break;
+            //---------------------------------
             // Display ------------------------
+            //---------------------------------
             case "displayBlock":
                 payload = {
                     index: this.props.index,
@@ -84,6 +86,57 @@ class Field extends React.Component {
                     index: this.props.index,
                     action: "setDisplay",
                     value: "inline-block"
+                }
+                break;
+            //--------------------------------
+            case "alignLeft":
+                payload = {
+                    index: this.props.index,
+                    action: "setAlign",
+                    value: "left"
+                }
+                break;
+            case "alignCenter":
+                payload = {
+                    index: this.props.index,
+                    action: "setAlign",
+                    value: "center"
+                }
+                break;
+            case "alignRight":
+                payload = {
+                    index: this.props.index,
+                    action: "setAlign",
+                    value: "right"
+                }
+                break;
+            //-------------------------------
+            case "above0":
+                payload = {
+                    index: this.props.index,
+                    action: "marginTop",
+                    value: 0
+                }
+                break;
+            case "above5":
+                payload = {
+                    index: this.props.index,
+                    action: "marginTop",
+                    value: 5
+                }
+                break;
+            case "above10":
+                payload = {
+                    index: this.props.index,
+                    action: "marginTop",
+                    value: 10
+                }
+                break;
+            case "above15":
+                payload = {
+                    index: this.props.index,
+                    action: "marginTop",
+                    value: 15
                 }
                 break;
         }
@@ -143,6 +196,21 @@ class Field extends React.Component {
                                 <DropdownButton id="dropdown-basic-button" variant="info" title="Width">
                                     <Dropdown.Item id="displayBlock" href="#/action-1" onClick={this.updateFieldStyle}>Block</Dropdown.Item>
                                     <Dropdown.Item id="displayInline" href="#/action-2" onClick={this.updateFieldStyle}>Inline</Dropdown.Item>
+                                </DropdownButton>
+                                <br />
+                                Align: {this.props.field.style.textAlign}
+                                <DropdownButton id="dropdown-basic-button" variant="info" title="Width">
+                                    <Dropdown.Item id="alignLeft" href="#/action-1" onClick={this.updateFieldStyle}>Left</Dropdown.Item>
+                                    <Dropdown.Item id="alignCenter" href="#/action-2" onClick={this.updateFieldStyle}>Center</Dropdown.Item>
+                                    <Dropdown.Item id="alignRight" href="#/action-2" onClick={this.updateFieldStyle}>Right</Dropdown.Item>
+                                </DropdownButton>
+                                <br />
+                                Spacing Above: {this.props.field.style.marginTop}px
+                                <DropdownButton id="dropdown-basic-button" variant="info" title="Width">
+                                    <Dropdown.Item id="above0" href="#/action-1" onClick={this.updateFieldStyle}>0px</Dropdown.Item>
+                                    <Dropdown.Item id="above5" href="#/action-1" onClick={this.updateFieldStyle}>5px</Dropdown.Item>
+                                    <Dropdown.Item id="above10" href="#/action-2" onClick={this.updateFieldStyle}>10px</Dropdown.Item>
+                                    <Dropdown.Item id="above15" href="#/action-2" onClick={this.updateFieldStyle}>15px</Dropdown.Item>
                                 </DropdownButton>
                             </Tab>
                         </Tabs>

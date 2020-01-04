@@ -23,12 +23,15 @@ class FieldPreview extends React.Component {
         } else if (this.props.field.name === "email") {
             name = "Email: ";
             input = <div><input type="email" style={{ width: "100%" }}></input></div>
+        } else if (this.props.field.name === "button") {
+            name = "";
+            input = <button>Submit</button>
         }
         return (
-            <li style={{ width: this.props.field.style.width + "%", display: this.props.field.style.display }}>
+            <li style={{ width: this.props.field.style.width + "%", display: this.props.field.style.display, marginTop: this.props.field.style.marginTop + "px" }}>
                 <div className="container">
                     <div className="row" style={{ width: "100%" }}>
-                        <div style={{ width: "100%" }}>
+                        <div style={{ width: "100%", textAlign: this.props.field.style.textAlign }}>
                             {
                                 name
                             }

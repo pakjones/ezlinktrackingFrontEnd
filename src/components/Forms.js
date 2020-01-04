@@ -51,6 +51,14 @@ class Forms extends React.Component {
             let temp = this.state.fields;
             temp[payload.index].style.display = payload.value;
             this.setState({ fields: temp });
+        } else if (payload.action === "setAlign") {
+            let temp = this.state.fields;
+            temp[payload.index].style.textAlign = payload.value;
+            this.setState({ fields: temp });
+        } else if (payload.action === "marginTop") {
+            let temp = this.state.fields;
+            temp[payload.index].style.marginTop = payload.value;
+            this.setState({ fields: temp });
         }
     }
 
@@ -59,7 +67,9 @@ class Forms extends React.Component {
             name: e.target.id,
             style: {
                 width: 100,
-                display: "block"
+                display: "block",
+                textAlign: "left",
+                marginTop: 0
             }
         };
         let newFields = this.state.fields;
@@ -81,7 +91,7 @@ class Forms extends React.Component {
                             <Dropdown.Menu>
                                 <Dropdown.Item onClick={this.newField} id="name">Name</Dropdown.Item>
                                 <Dropdown.Item onClick={this.newField} id="email">Email</Dropdown.Item>
-                                <Dropdown.Item onClick={this.newField} id="else">Something else</Dropdown.Item>
+                                <Dropdown.Item onClick={this.newField} id="button">Button</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
                     </div>
