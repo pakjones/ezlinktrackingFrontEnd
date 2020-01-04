@@ -42,6 +42,7 @@ class Field extends React.Component {
     updateFieldStyle = (e) => {
         let payload;
         switch (e.target.id) {
+            // Width ----------------------------
             case "width25":
                 payload = {
                     index: this.props.index,
@@ -68,6 +69,21 @@ class Field extends React.Component {
                     index: this.props.index,
                     action: "setWidth",
                     value: 100
+                }
+                break;
+            // Display ------------------------
+            case "displayBlock":
+                payload = {
+                    index: this.props.index,
+                    action: "setDisplay",
+                    value: "block"
+                }
+                break;
+            case "displayInline":
+                payload = {
+                    index: this.props.index,
+                    action: "setDisplay",
+                    value: "inline-block"
                 }
                 break;
         }
@@ -121,6 +137,12 @@ class Field extends React.Component {
                                     <Dropdown.Item id="width50" href="#/action-2" onClick={this.updateFieldStyle}>50%</Dropdown.Item>
                                     <Dropdown.Item id="width75" href="#/action-3" onClick={this.updateFieldStyle}>75%</Dropdown.Item>
                                     <Dropdown.Item id="width100" href="#/action-3" onClick={this.updateFieldStyle}>100%</Dropdown.Item>
+                                </DropdownButton>
+                                <br />
+                                Display: {this.props.field.style.display}
+                                <DropdownButton id="dropdown-basic-button" variant="info" title="Width">
+                                    <Dropdown.Item id="displayBlock" href="#/action-1" onClick={this.updateFieldStyle}>Block</Dropdown.Item>
+                                    <Dropdown.Item id="displayInline" href="#/action-2" onClick={this.updateFieldStyle}>Inline</Dropdown.Item>
                                 </DropdownButton>
                             </Tab>
                         </Tabs>

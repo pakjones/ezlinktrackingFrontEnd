@@ -47,6 +47,10 @@ class Forms extends React.Component {
             let temp = this.state.fields;
             temp[payload.index].style.width = payload.value;
             this.setState({ fields: temp });
+        } else if (payload.action === "setDisplay") {
+            let temp = this.state.fields;
+            temp[payload.index].style.display = payload.value;
+            this.setState({ fields: temp });
         }
     }
 
@@ -54,7 +58,8 @@ class Forms extends React.Component {
         let type = {
             name: e.target.id,
             style: {
-                width: 100
+                width: 100,
+                display: "block"
             }
         };
         let newFields = this.state.fields;

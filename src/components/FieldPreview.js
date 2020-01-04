@@ -19,16 +19,16 @@ class FieldPreview extends React.Component {
         let input;
         if (this.props.field.name === "name") {
             name = "Name: ";
-            input = <div><input type="text" style={{ width: this.props.field.style.width + "%" }}></input></div>
+            input = <div><input type="text" style={{ width: "100%" }}></input></div>
         } else if (this.props.field.name === "email") {
             name = "Email: ";
-            input = <div><input type="email" style={{ width: this.props.field.style.width + "%" }}></input></div>
+            input = <div><input type="email" style={{ width: "100%" }}></input></div>
         }
         return (
-            <li>
+            <li style={{ width: this.props.field.style.width + "%", display: this.props.field.style.display }}>
                 <div className="container">
-                    <div className="row">
-                        <div className="col-md-8">
+                    <div className="row" style={{ width: "100%" }}>
+                        <div style={{ width: "100%" }}>
                             {
                                 name
                             }
