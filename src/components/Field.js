@@ -193,20 +193,20 @@ class Field extends React.Component {
                                 </DropdownButton>
                                 <br />
                                 Display: {this.props.field.style.display}
-                                <DropdownButton id="dropdown-basic-button" variant="info" title="Width">
+                                <DropdownButton id="dropdown-basic-button" variant="info" title="Display">
                                     <Dropdown.Item id="displayBlock" href="#/action-1" onClick={this.updateFieldStyle}>Block</Dropdown.Item>
                                     <Dropdown.Item id="displayInline" href="#/action-2" onClick={this.updateFieldStyle}>Inline</Dropdown.Item>
                                 </DropdownButton>
                                 <br />
                                 Align: {this.props.field.style.textAlign}
-                                <DropdownButton id="dropdown-basic-button" variant="info" title="Width">
+                                <DropdownButton id="dropdown-basic-button" variant="info" title="Align">
                                     <Dropdown.Item id="alignLeft" href="#/action-1" onClick={this.updateFieldStyle}>Left</Dropdown.Item>
                                     <Dropdown.Item id="alignCenter" href="#/action-2" onClick={this.updateFieldStyle}>Center</Dropdown.Item>
                                     <Dropdown.Item id="alignRight" href="#/action-2" onClick={this.updateFieldStyle}>Right</Dropdown.Item>
                                 </DropdownButton>
                                 <br />
                                 Spacing Above: {this.props.field.style.marginTop}px
-                                <DropdownButton id="dropdown-basic-button" variant="info" title="Width">
+                                <DropdownButton id="dropdown-basic-button" variant="info" title="Spacing Above">
                                     <Dropdown.Item id="above0" href="#/action-1" onClick={this.updateFieldStyle}>0px</Dropdown.Item>
                                     <Dropdown.Item id="above5" href="#/action-1" onClick={this.updateFieldStyle}>5px</Dropdown.Item>
                                     <Dropdown.Item id="above10" href="#/action-2" onClick={this.updateFieldStyle}>10px</Dropdown.Item>
