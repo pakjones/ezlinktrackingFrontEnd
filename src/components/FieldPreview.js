@@ -17,7 +17,7 @@ class FieldPreview extends React.Component {
     render() {
         let name;
         let input;
-        if (this.props.field.name === "text") {
+        if (this.props.field.name === "textInput") {
             name = "Name: ";
             input = <div><input type="text" style={{ width: "100%" }} value={this.props.field.placeholder} readOnly></input></div>
         } else if (this.props.field.name === "email") {
