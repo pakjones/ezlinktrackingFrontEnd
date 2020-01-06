@@ -184,34 +184,45 @@ class Field extends React.Component {
                             </Tab>
                             <Tab eventKey="Style" title="Style">
                                 <br />
-                                Width: {this.props.field.style.width}
-                                <DropdownButton id="dropdown-basic-button" variant="info" title="Width">
+                                <DropdownButton id="dropdown-basic-button" variant="info" title="Width" style={{ display: "inline-block" }}>
                                     <Dropdown.Item id="width25" href="#/action-1" onClick={this.updateFieldStyle}>25%</Dropdown.Item>
                                     <Dropdown.Item id="width50" href="#/action-2" onClick={this.updateFieldStyle}>50%</Dropdown.Item>
                                     <Dropdown.Item id="width75" href="#/action-3" onClick={this.updateFieldStyle}>75%</Dropdown.Item>
                                     <Dropdown.Item id="width100" href="#/action-3" onClick={this.updateFieldStyle}>100%</Dropdown.Item>
                                 </DropdownButton>
+                                <div style={{ display: "inline-block" }}>
+                                    {this.props.field.style.width}%
+                                </div>
                                 <br />
-                                Display: {this.props.field.style.display}
-                                <DropdownButton id="dropdown-basic-button" variant="info" title="Display">
+                                <br />
+                                <DropdownButton id="dropdown-basic-button" variant="info" title="Display" style={{ display: "inline-block" }}>
                                     <Dropdown.Item id="displayBlock" href="#/action-1" onClick={this.updateFieldStyle}>Block</Dropdown.Item>
                                     <Dropdown.Item id="displayInline" href="#/action-2" onClick={this.updateFieldStyle}>Inline</Dropdown.Item>
                                 </DropdownButton>
+                                <div style={{ display: "inline-block" }}>
+                                    {this.props.field.style.display}
+                                </div>
                                 <br />
-                                Align: {this.props.field.style.textAlign}
-                                <DropdownButton id="dropdown-basic-button" variant="info" title="Align">
+                                <br />
+                                <DropdownButton id="dropdown-basic-button" variant="info" title="Align" style={{ display: "inline-block" }}>
                                     <Dropdown.Item id="alignLeft" href="#/action-1" onClick={this.updateFieldStyle}>Left</Dropdown.Item>
                                     <Dropdown.Item id="alignCenter" href="#/action-2" onClick={this.updateFieldStyle}>Center</Dropdown.Item>
                                     <Dropdown.Item id="alignRight" href="#/action-2" onClick={this.updateFieldStyle}>Right</Dropdown.Item>
                                 </DropdownButton>
+                                <div style={{ display: "inline-block" }}>
+                                    {this.props.field.style.textAlign}
+                                </div>
                                 <br />
-                                Spacing Above: {this.props.field.style.marginTop}px
-                                <DropdownButton id="dropdown-basic-button" variant="info" title="Spacing Above">
+                                <br />
+                                <DropdownButton id="dropdown-basic-button" variant="info" title="Spacing Above" style={{ display: "inline-block" }}>
                                     <Dropdown.Item id="above0" href="#/action-1" onClick={this.updateFieldStyle}>0px</Dropdown.Item>
                                     <Dropdown.Item id="above5" href="#/action-1" onClick={this.updateFieldStyle}>5px</Dropdown.Item>
                                     <Dropdown.Item id="above10" href="#/action-2" onClick={this.updateFieldStyle}>10px</Dropdown.Item>
                                     <Dropdown.Item id="above15" href="#/action-2" onClick={this.updateFieldStyle}>15px</Dropdown.Item>
                                 </DropdownButton>
+                                <div style={{ display: "inline-block" }}>
+                                    {this.props.field.style.marginTop}px
+                                </div>
                             </Tab>
                         </Tabs>
                     </Card.Body>
