@@ -199,11 +199,6 @@ class Forms extends React.Component {
                             </Modal.Body>
                         </Modal>
                     </div>
-                    <div className="col-md-3">
-                        <Button variant="success">
-                            Save Changes
-                        </Button>
-                    </div>
                 </div>
                 <br />
                 <div className="row" style={{ marginLeft: '0px', paddingLeft: '0px' }}>
