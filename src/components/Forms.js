@@ -43,6 +43,14 @@ class Forms extends React.Component {
 
                 this.setState({ fields: fields2 });
             }
+        } else if (payload.action === "setLabel") {
+            let temp = this.state.fields;
+            temp[payload.index].label = payload.value;
+            this.setState({ fields: temp });
+        } else if (payload.action === "setPlaceholder") {
+            let temp = this.state.fields;
+            temp[payload.index].placeholder = payload.value;
+            this.setState({ fields: temp });
         } else if (payload.action === "setWidth") {
             let temp = this.state.fields;
             temp[payload.index].style.width = payload.value;
@@ -65,6 +73,8 @@ class Forms extends React.Component {
     newField = (e) => {
         let type = {
             name: e.target.id,
+            label: "Label:",
+            placeholder: "",
             style: {
                 width: 100,
                 display: "block",
@@ -89,7 +99,7 @@ class Forms extends React.Component {
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu>
-                                <Dropdown.Item onClick={this.newField} id="name">Name</Dropdown.Item>
+                                <Dropdown.Item onClick={this.newField} id="text">Text Input</Dropdown.Item>
                                 <Dropdown.Item onClick={this.newField} id="email">Email</Dropdown.Item>
                                 <Dropdown.Item onClick={this.newField} id="button">Button</Dropdown.Item>
                             </Dropdown.Menu>

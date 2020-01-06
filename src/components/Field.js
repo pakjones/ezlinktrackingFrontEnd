@@ -4,6 +4,8 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import DropdownButton from 'react-bootstrap/DropdownButton';
+import FormControl from 'react-bootstrap/FormControl';
+import InputGroup from 'react-bootstrap/InputGroup';
 
 class Field extends React.Component {
     constructor(props) {
@@ -26,6 +28,24 @@ class Field extends React.Component {
         let payload = {
             index: this.props.index,
             action: "moveUp"
+        }
+        this.props.update(payload);
+    }
+
+    updateLabel = (e) => {
+        let payload = {
+            index: this.props.index,
+            action: "setLabel",
+            value: e.target.value.trim()
+        }
+        this.props.update(payload);
+    }
+
+    updatePlaceholder = (e) => {
+        let payload = {
+            index: this.props.index,
+            action: "setPlaceholder",
+            value: e.target.value.trim()
         }
         this.props.update(payload);
     }
@@ -143,6 +163,7 @@ class Field extends React.Component {
         this.props.update(payload);
     }
 
+
     render() {
 
         let optionsStyle = {
@@ -152,34 +173,54 @@ class Field extends React.Component {
         return (
             <li>
                 <Card>
+                    <Card.Header id={"card" + this.props.index}>
+
+                    </Card.Header>
                     <Card.Body>
-                        <Tabs defaultActiveKey="Field" id="uncontrolled-tab-example" variant="pills">
+                        <div style={{ float: "left" }}>
+                            {this.props.index + 1}
+                            {this.props.field.name}
+                        </div>
+                        <Dropdown style={{ float: "right" }}>
+                            <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+                                Options
+                                        </Dropdown.Toggle>
+                            <Dropdown.Menu>
+                                <Dropdown.Item onClick={this.moveFieldUp}>Move Up</Dropdown.Item>
+                                <Dropdown.Item onClick={this.moveFieldDown}>Move Down</Dropdown.Item>
+
+                                <Dropdown.Divider />
+
+                                <Dropdown.Item onClick={this.deleteField}>Delete</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                        <br />
+                        <Tabs /*defaultActiveKey="Field"*/ id="uncontrolled-tab-example" variant="pills">
                             <Tab eventKey="Field" title="Field">
                                 <br />
                                 <div className="row">
-                                    <div className="col-md-4">
-                                        {this.props.index + 1}
-                                        {this.props.field.name}
-                                    </div>
-                                    <div className="col-md-4">
-
-                                    </div>
-                                    <div className="col-md-4" style={optionsStyle}>
-                                        <Dropdown>
-                                            <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-                                                Options
-                                        </Dropdown.Toggle>
-
-                                            <Dropdown.Menu>
-                                                <Dropdown.Item onClick={this.moveFieldUp}>Move Up</Dropdown.Item>
-                                                <Dropdown.Item onClick={this.moveFieldDown}>Move Down</Dropdown.Item>
-
-                                                <Dropdown.Divider />
-
-                                                <Dropdown.Item onClick={this.deleteField}>Delete</Dropdown.Item>
-                                            </Dropdown.Menu>
-                                        </Dropdown>
-                                    </div>
+                                    <InputGroup className="mb-3">
+                                        <InputGroup.Prepend>
+                                            <InputGroup.Text id="inputGroup-sizing-default">Label</InputGroup.Text>
+                                        </InputGroup.Prepend>
+                                        <FormControl
+                                            aria-label="Default"
+                                            aria-describedby="inputGroup-sizing-default"
+                                            onChange={this.updateLabel}
+                                        />
+                                    </InputGroup>
+                                </div>
+                                <div className="row">
+                                    <InputGroup className="mb-3">
+                                        <InputGroup.Prepend>
+                                            <InputGroup.Text id="inputGroup-sizing-default">Placeholder</InputGroup.Text>
+                                        </InputGroup.Prepend>
+                                        <FormControl
+                                            aria-label="Default"
+                                            aria-describedby="inputGroup-sizing-default"
+                                            onChange={this.updatePlaceholder}
+                                        />
+                                    </InputGroup>
                                 </div>
                             </Tab>
                             <Tab eventKey="Style" title="Style">

@@ -17,12 +17,12 @@ class FieldPreview extends React.Component {
     render() {
         let name;
         let input;
-        if (this.props.field.name === "name") {
+        if (this.props.field.name === "text") {
             name = "Name: ";
-            input = <div><input type="text" style={{ width: "100%" }}></input></div>
+            input = <div><input type="text" style={{ width: "100%" }} value={this.props.field.placeholder} readOnly></input></div>
         } else if (this.props.field.name === "email") {
             name = "Email: ";
-            input = <div><input type="email" style={{ width: "100%" }}></input></div>
+            input = <div><input type="email" style={{ width: "100%" }} value={this.props.field.placeholder} readOnly></input></div>
         } else if (this.props.field.name === "button") {
             name = "";
             input = <button>Submit</button>
@@ -33,7 +33,7 @@ class FieldPreview extends React.Component {
                     <div className="row" style={{ width: "100%" }}>
                         <div style={{ width: "100%", textAlign: this.props.field.style.textAlign }}>
                             {
-                                name
+                                this.props.field.label
                             }
                             {
                                 input
