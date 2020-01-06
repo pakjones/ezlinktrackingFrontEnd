@@ -125,13 +125,20 @@ class Forms extends React.Component {
 
         let fullSSEndpoint = baseURI + "" + endpoint + "" + "/jsonp/";
 
-        this.setState({ fullSSEndpoint: fullSSEndpoint });
-
         // Make the form
         let form = "";
-        for (let i = 0; i < this.state.fields.length; i++) {
+        form += "<form action='" + fullSSEndpoint + "'>"
 
+        // Add fields to string
+        for (let i = 0; i < this.state.fields.length; i++) {
+            form += "<label>Label</label>";
+            form += "<input name='" + i + "'></input>"
         }
+
+        form += "</form>"
+
+        this.setState({ fullSSEndpoint: form });
+
     }
 
     render() {
