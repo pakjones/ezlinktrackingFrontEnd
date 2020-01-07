@@ -29,8 +29,8 @@ class FieldPreview extends React.Component {
         }
         return (
             <li style={{ width: this.props.field.style.width + "%", display: this.props.field.style.display, marginTop: this.props.field.style.marginTop + "px" }}>
-                <div className="container">
-                    <div className="row" style={{ width: "100%" }}>
+                <div>
+                    <div style={{ width: "100%" }}>
                         <div style={{ width: "100%", textAlign: this.props.field.style.textAlign }}>
                             {
                                 this.props.field.label

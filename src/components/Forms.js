@@ -134,10 +134,16 @@ class Forms extends React.Component {
             console.log(this.state.fields[i]);
             let field = this.state.fields[i];
             if (field.name === "textInput" || field.name === "email") {
-                form += "<div style='width: " + field.style.width + "%; display: " + field.style.display + "; text-align: " + field.style.textAling + "; margin-top: " + field.style.marginTop + "px;'>";
+                form += "<li style='width: " + field.style.width + "%; display: " + field.style.display + "; margin-top: " + field.style.marginTop + "px;'>"
+                form += "<div>";
+                form += "<div style='width: 100%;'>";
+                form += "<div style='width: 100%; text-align: " + field.style.textAlign + ";'>"
                 form += "<label>" + field.label + "</label>";
-                form += "<input name='" + field.label + "' value='" + field.placeholder + "'>";
+                form += "<div><input name='" + field.label + "' value='" + field.placeholder + "' style='width: " + field.style.width + "%;'></div>";
                 form += "</div>";
+                form += "</div>";
+                form += "</div>";
+                form += "</li>";
             } else if (field.name === "button") {
                 form += "<div style='width: " + field.style.width + "%; display: " + field.style.display + "; text-align: " + field.style.textAling + "; margin-top: " + field.style.marginTop + "px;'>";
                 form += "<input type='submit' value='" + field.label + "'>";
