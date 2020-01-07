@@ -131,8 +131,19 @@ class Forms extends React.Component {
 
         // Add fields to string
         for (let i = 0; i < this.state.fields.length; i++) {
-            form += "<label>Label</label>";
-            form += "<input name='" + i + "'></input>"
+            console.log(this.state.fields[i]);
+            let field = this.state.fields[i];
+            if (field.name === "textInput" || field.name === "email") {
+                form += "<div style='width: " + field.style.width + "%; display: " + field.style.display + "; text-align: " + field.style.textAling + "; margin-top: " + field.style.marginTop + "px;'>";
+                form += "<label>" + field.label + "</label>";
+                form += "<input name='" + field.label + "' value='" + field.placeholder + "'>";
+                form += "</div>";
+            } else if (field.name === "button") {
+                form += "<div style='width: " + field.style.width + "%; display: " + field.style.display + "; text-align: " + field.style.textAling + "; margin-top: " + field.style.marginTop + "px;'>";
+                form += "<input type='submit' value='" + field.label + "'>";
+                form += "</div>";
+            }
+
         }
 
         form += "</form>"
