@@ -93,6 +93,11 @@ class Forms extends React.Component {
                 marginTop: 0
             }
         };
+
+        if (type.name === "button") {
+            type.label = "Submit";
+        }
+
         let newFields = this.state.fields;
         newFields.push(type);
         this.setState({ fields: newFields });
