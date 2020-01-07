@@ -1,5 +1,6 @@
 import React from 'react';
 import Field from './Field';
+import ListGroup from 'react-bootstrap/ListGroup';
 
 class Fields extends React.Component {
     constructor(props) {
@@ -16,12 +17,12 @@ class Fields extends React.Component {
         if (this.props.fields.length > 0) {
             let array = [];
             for (let i = 0; i < this.props.fields.length; i++) {
-                array.push(<Field field={this.props.fields[i]} key={i} index={i} update={this.updateFields} />);
+                array.push(<ListGroup.Item><Field field={this.props.fields[i]} key={i} index={i} update={this.updateFields} /></ListGroup.Item>);
             }
             return (
-                <ul id="fieldsList" style={{ paddingLeft: "0px" }}>
+                <ListGroup style={{ paddingLeft: "0px" }} variant="flush">
                     {array}
-                </ul>
+                </ListGroup>
             )
 
         } else {

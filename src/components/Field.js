@@ -171,11 +171,8 @@ class Field extends React.Component {
         }
 
         return (
-            <li>
+            <div>
                 <Card>
-                    <Card.Header id={"card" + this.props.index}>
-
-                    </Card.Header>
                     <Card.Body>
                         <div style={{ float: "left" }}>
                             {this.props.index + 1}
@@ -270,7 +267,7 @@ class Field extends React.Component {
                 </Card>
 
 
-            </li>
+            </div>
         );
     }
 }
