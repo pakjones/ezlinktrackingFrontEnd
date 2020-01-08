@@ -144,7 +144,7 @@ class Forms extends React.Component {
                 form += "<div style='width: 100%;'>";
                 form += "<div style='width: 100%; text-align: " + field.style.textAlign + ";'>"
                 form += "<label>" + field.label + "</label>";
-                form += "<div><input name='" + field.label + "' value='" + field.placeholder + "' style='width: " + field.style.width + "%;'></div>";
+                form += "<div style='width: 100%;'><input name='" + field.label + "' value='" + field.placeholder + "' style='width: 100%;'></div>";
                 form += "</div>";
                 form += "</div>";
                 form += "</div>";
