@@ -1,7 +1,7 @@
 import React from 'react';
 import List from './components/list';
 import Docs from './components/Docs';
-import Forms from './components/Forms';
+import Forms from './components/Forms/Forms';
 import Nav from './components/Nav';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
