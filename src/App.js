@@ -2,6 +2,7 @@ import React from 'react';
 import List from './components/list';
 import Docs from './components/Docs';
 import Forms from './components/Forms';
+import Nav from './components/Nav';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -9,6 +10,9 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      loggedIn: false,
+      account: "",
+      accountName: "",
       id: "",
       redirect: "",
       createLink: "",
@@ -121,15 +125,7 @@ class App extends React.Component {
     if (this.state.page === 0) {
       return (
         <div>
-          <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
-
-            <ul className="navbar-nav">
-              <li className="nav-item active"><a className="nav-link" onClick={this.setPage0}>Home</a></li>
-              <li className="nav-item"><a className="nav-link" onClick={this.setPage2}>Forms</a></li>
-              <li className="nav-item"><a className="nav-link" onClick={this.setPage1}>Info</a></li>
-            </ul>
-
-          </nav>
+          <Nav page={this.state.page} setPage0={this.setPage0} setPage1={this.setPage1} setPage2={this.setPage2} />
           <div className="jumbotron text-center">
             <h1>EZLinktracking.com</h1>
             <p>Easy - Free - Link Tracking</p>
@@ -168,29 +164,14 @@ class App extends React.Component {
     } else if (this.state.page === 1) {
       return (
         <div>
-          <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
-
-            <ul className="navbar-nav">
-              <li className="nav-item"><a className="nav-link" onClick={this.setPage0}>Home</a></li>
-              <li className="nav-item"><a className="nav-link" onClick={this.setPage2}>Forms</a></li>
-              <li className="nav-item active"><a className="nav-link" onClick={this.setPage1}>Info</a></li>
-            </ul>
-
-          </nav>
+          <Nav page={this.state.page} setPage0={this.setPage0} setPage1={this.setPage1} setPage2={this.setPage2} />
           <Docs />
         </div>
       );
     } else if (this.state.page === 2) {
       return (
         <div>
-          <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
-            <ul className="navbar-nav">
-              <li className="nav-item"><a className="nav-link" onClick={this.setPage0}>Home</a></li>
-              <li className="nav-item active"><a className="nav-link" onClick={this.setPage2}>Forms</a></li>
-              <li className="nav-item"><a className="nav-link" onClick={this.setPage1}>Info</a></li>
-            </ul>
-
-          </nav>
+          <Nav page={this.state.page} setPage0={this.setPage0} setPage1={this.setPage1} setPage2={this.setPage2} />
           <Forms />
         </div>
       )
