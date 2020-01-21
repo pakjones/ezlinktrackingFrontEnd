@@ -14,11 +14,11 @@ class Forms extends React.Component {
             fields: [],
             ssModalShow: false,
             ezlModalShow: false,
-            ssEmbedDraft: "",
-            ssEmbedSaved: "",
+            ssEmbed: "",
             ssURI: "",
             ssEndPoint: "",
-            fullSSEndpoint: ""
+            formAction: "",
+            embedCode: null,
         };
     }
 
@@ -110,29 +110,29 @@ class Forms extends React.Component {
     ezlHandleShow = () => {
         this.setState({ ezlModalShow: true });
 
-
     }
     ezlHandleClose = () => { this.setState({ ezlModalShow: false }) }
 
     ssEmbedChange = (e) => {
-        this.setState({ ssEmbedDraft: e.target.value });
+        this.setState({ ssEmbed: e.target.value });
     }
 
-    modalSave = () => {
-        this.setState({ ssModalShow: false });
-
+    createEmbedCode = () => {
         // Parse and make the embed code
         // Make the SharpSpring POST endpoint
-        let parsed = this.state.ssEmbedDraft.toString().split("'");
+        let parsed = this.state.ssEmbed.toString().split("'");
         console.log(parsed);
-        let baseURI = parsed[3];
-        let endpoint = parsed[7];
+        let SSbaseURI = parsed[3];
+        let SSendpoint = parsed[7];
+        let endpoint;
 
-        let fullSSEndpoint = baseURI + "" + endpoint + "" + "/jsonp/";
+        if (SSbaseURI && SSendpoint) {
+            endpoint = SSbaseURI + "" + SSendpoint + "" + "/jsonp/";
+        }
 
         // Make the form
         let form = "";
-        form += "<form action='" + fullSSEndpoint + "'>"
+        form += "<form action='" + endpoint + "'>"
 
         // Add fields to string
         for (let i = 0; i < this.state.fields.length; i++) {
@@ -159,7 +159,14 @@ class Forms extends React.Component {
 
         form += "</form>"
 
-        this.setState({ fullSSEndpoint: form });
+        return form;
+    }
+
+    modalSave = () => {
+
+        this.setState({ ssModalShow: false });
+
+        this.setState({ embedCode: this.createEmbedCode() });
 
     }
 
@@ -222,7 +229,7 @@ class Forms extends React.Component {
                                     <InputGroup.Prepend>
                                         <InputGroup.Text>Embed Code</InputGroup.Text>
                                     </InputGroup.Prepend>
-                                    <FormControl as="textarea" aria-label="With textarea" value={this.state.fullSSEndpoint} readOnly />
+                                    <FormControl as="textarea" aria-label="With textarea" value={this.state.embedCode} readOnly />
                                 </InputGroup>
 
                             </Modal.Body>
