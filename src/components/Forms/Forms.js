@@ -113,6 +113,7 @@ class Forms extends React.Component {
     handleSSClose = () => { this.setState({ ssModalShow: false }) }
 
     ezlHandleShow = () => {
+        this.createEmbedCode();
         this.setState({ ezlModalShow: true });
 
     }
@@ -125,11 +126,18 @@ class Forms extends React.Component {
     createEmbedCode = () => {
         // Parse and make the embed code
         // Make the SharpSpring POST endpoint
-        let parsed = this.state.ssEmbed.toString().split("'");
-        console.log(parsed);
-        let SSbaseURI = parsed[3];
-        let SSendpoint = parsed[7];
-        let endpoint;
+
+        let SSbaseURI;
+        let SSendpoint;
+
+        if (this.state.ssEmbed !== "") {
+            let parsed = this.state.ssEmbed.toString().split("'");
+            console.log(parsed);
+            SSbaseURI = parsed[3];
+            SSendpoint = parsed[7];
+        }
+
+        let endpoint = "test";
 
         if (SSbaseURI && SSendpoint) {
             endpoint = SSbaseURI + "" + SSendpoint + "" + "/jsonp/";
@@ -141,7 +149,7 @@ class Forms extends React.Component {
 
         // Add fields to string
         for (let i = 0; i < this.state.fields.length; i++) {
-            console.log(this.state.fields[i]);
+            //console.log(this.state.fields[i]);
             let field = this.state.fields[i];
             if (field.name === "textInput" || field.name === "email") {
                 form += "<li style='width: " + field.style.width + "%; display: " + field.style.display + "; margin-top: " + field.style.marginTop + "px;'>"
@@ -164,14 +172,14 @@ class Forms extends React.Component {
 
         form += "</form>"
 
-        return form;
+        this.setState({ embedCode: form });
     }
 
     modalSave = () => {
 
         this.setState({ ssModalShow: false });
 
-        this.setState({ embedCode: this.createEmbedCode() });
+        this.createEmbedCode();
 
     }
 
