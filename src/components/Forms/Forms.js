@@ -12,6 +12,7 @@ class Forms extends React.Component {
         super(props);
         this.state = {
             fields: [],
+            activeField: 0,
             ssModalShow: false,
             ezlModalShow: false,
             ssEmbed: "",
@@ -20,6 +21,10 @@ class Forms extends React.Component {
             formAction: "",
             embedCode: null,
         };
+    }
+
+    setActiveField = (index) => {
+        this.setState({ activeField: index });
     }
 
     updateFields = (payload) => {
@@ -239,10 +244,10 @@ class Forms extends React.Component {
                 <br />
                 <div className="row" style={{ marginLeft: '0px', paddingLeft: '0px' }}>
                     <div className="col-md-6">
-                        <Fields fields={this.state.fields} updateFields={this.updateFields} />
+                        <Fields fields={this.state.fields} activeField={this.state.activeField} updateFields={this.updateFields} />
                     </div>
                     <div className="col-md-6">
-                        <FieldsPreview fields={this.state.fields} />
+                        <FieldsPreview fields={this.state.fields} activeField={this.state.activeField} setActiveField={this.setActiveField} />
                     </div>
                 </div>
             </div>
