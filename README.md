@@ -13,5 +13,5 @@
 <h3>Coming Soon™:</h3>
 <ul>
   <li>Accounts</li>
-  <li>Leads</li>
+  <li>Contacts</li>
 </ul>
