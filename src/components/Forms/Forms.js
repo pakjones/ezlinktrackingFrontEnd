@@ -105,7 +105,7 @@ class Forms extends React.Component {
 
         let newFields = this.state.fields;
         newFields.push(type);
-        this.setState({ fields: newFields });
+        this.setState({ fields: newFields, activeField: this.state.fields.length - 1 });
     }
 
     // Modal functions

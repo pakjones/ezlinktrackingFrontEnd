@@ -18,7 +18,12 @@ class FieldPreview extends React.Component {
     }
 
     click = () => {
-        this.props.setActiveField(this.props.index);
+        if (this.props.activeField !== this.props.index) {
+            this.props.setActiveField(this.props.index);
+        } else {
+            this.props.setActiveField(null);
+        }
+
     }
 
     offHover = () => {

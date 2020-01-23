@@ -27,10 +27,15 @@ class Fields extends React.Component {
                 }
             }
             */
-            if (this.props.fields[this.props.activeField].name === "textInput" || this.props.fields[this.props.activeField].name === "email") {
-                display = <ListGroup.Item key={this.props.activeField}><Field field={this.props.fields[this.props.activeField]} key={this.props.activeField} index={this.props.activeField} update={this.updateFields} /></ListGroup.Item>;
-            } else if (this.props.fields[this.props.activeField].name === "button") {
-                display = <ListGroup.Item key={this.props.activeField}><FieldButton field={this.props.fields[this.props.activeField]} key={this.props.activeField} index={this.props.activeField} update={this.updateFields} /></ListGroup.Item>;
+            if (this.props.activeField !== null) {
+                if (this.props.fields[this.props.activeField].name === "textInput" || this.props.fields[this.props.activeField].name === "email") {
+                    display = <ListGroup.Item key={this.props.activeField}><Field field={this.props.fields[this.props.activeField]} key={this.props.activeField} index={this.props.activeField} update={this.updateFields} /></ListGroup.Item>;
+                } else if (this.props.fields[this.props.activeField].name === "button") {
+                    display = <ListGroup.Item key={this.props.activeField}><FieldButton field={this.props.fields[this.props.activeField]} key={this.props.activeField} index={this.props.activeField} update={this.updateFields} /></ListGroup.Item>;
+                }
+            }
+            else {
+                display = <div></div>;
             }
             return (
                 <ListGroup style={{ paddingLeft: "0px" }} variant="flush">
