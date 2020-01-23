@@ -31,7 +31,7 @@ class Forms extends React.Component {
         if (payload.action === "delete") {
             let newFields = this.state.fields;
             newFields.splice(payload.index, 1);
-            this.setState({ fields: newFields });
+            this.setState({ fields: newFields, activeField: null });
         }
         else if (payload.action === "moveUp") {
             console.log("Trying to move up");
