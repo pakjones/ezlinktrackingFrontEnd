@@ -204,6 +204,7 @@ class Field extends React.Component {
                                             aria-label="Default"
                                             aria-describedby="inputGroup-sizing-default"
                                             onChange={this.updateLabel}
+                                            placeholder={this.props.field.label}
                                         />
                                     </InputGroup>
                                 </div>
@@ -216,6 +217,7 @@ class Field extends React.Component {
                                             aria-label="Default"
                                             aria-describedby="inputGroup-sizing-default"
                                             onChange={this.updatePlaceholder}
+                                            placeholder={this.props.field.placeholder}
                                         />
                                     </InputGroup>
                                 </div>
