@@ -83,6 +83,30 @@ class Forms extends React.Component {
             let temp = this.state.fields;
             temp[payload.index].style.marginTop = payload.value;
             this.setState({ fields: temp });
+        } else if (payload.action === "textShadowToggle") {
+            let temp = this.state.fields;
+            temp[payload.index].style.textShadow.enabled = payload.value;
+            this.setState({ fields: temp });
+        } else if (payload.action === "fieldShadowToggle") {
+            let temp = this.state.fields;
+            temp[payload.index].style.fieldShadow.enabled = payload.value;
+            this.setState({ fields: temp });
+        } else if (payload.action === "setTextShadowRight") {
+            let temp = this.state.fields;
+            temp[payload.index].style.textShadow.right = payload.value;
+            this.setState({ fields: temp });
+        } else if (payload.action === "setTextShadowDown") {
+            let temp = this.state.fields;
+            temp[payload.index].style.textShadow.down = payload.value;
+            this.setState({ fields: temp });
+        } else if (payload.action === "setTextShadowBlur") {
+            let temp = this.state.fields;
+            temp[payload.index].style.textShadow.blur = payload.value;
+            this.setState({ fields: temp });
+        } else if (payload.action === "setTextShadowColor") {
+            let temp = this.state.fields;
+            temp[payload.index].style.textShadow.color = payload.value;
+            this.setState({ fields: temp });
         }
     }
 
@@ -95,7 +119,21 @@ class Forms extends React.Component {
                 width: 100,
                 display: "block",
                 textAlign: "left",
-                marginTop: 0
+                marginTop: 0,
+                fieldShadow: {
+                    enabled: false,
+                    right: 0,
+                    down: 0,
+                    blur: 0,
+                    color: "grey",
+                },
+                textShadow: {
+                    enabled: false,
+                    right: 0,
+                    down: 0,
+                    blur: 0,
+                    color: "grey",
+                }
             }
         };
 

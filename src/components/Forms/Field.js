@@ -6,6 +6,7 @@ import Tab from 'react-bootstrap/Tab';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import FormControl from 'react-bootstrap/FormControl';
 import InputGroup from 'react-bootstrap/InputGroup';
+import Form from 'react-bootstrap/Form';
 
 class Field extends React.Component {
     constructor(props) {
@@ -50,6 +51,39 @@ class Field extends React.Component {
         this.props.update(payload);
     }
 
+    updateTextShadowRight = (e) => {
+        let payload = {
+            index: this.props.index,
+            action: "setTextShadowRight",
+            value: e.target.value.trim()
+        }
+        this.props.update(payload);
+    }
+    updateTextShadowDown = (e) => {
+        let payload = {
+            index: this.props.index,
+            action: "setTextShadowDown",
+            value: e.target.value.trim()
+        }
+        this.props.update(payload);
+    }
+    updateTextShadowBlur = (e) => {
+        let payload = {
+            index: this.props.index,
+            action: "setTextShadowBlur",
+            value: e.target.value.trim()
+        }
+        this.props.update(payload);
+    }
+    updateTextShadowColor = (e) => {
+        let payload = {
+            index: this.props.index,
+            action: "setTextShadowColor",
+            value: e.target.value.trim()
+        }
+        this.props.update(payload);
+    }
+
     moveFieldDown = () => {
         console.log("MoveDown");
         let payload = {
@@ -62,7 +96,9 @@ class Field extends React.Component {
     updateFieldStyle = (e) => {
         let payload;
         switch (e.target.id) {
+            //-----------------------------------
             // Width ----------------------------
+            //-----------------------------------
             case "width25":
                 payload = {
                     index: this.props.index,
@@ -109,6 +145,8 @@ class Field extends React.Component {
                 }
                 break;
             //--------------------------------
+            // Align -------------------------
+            //--------------------------------
             case "alignLeft":
                 payload = {
                     index: this.props.index,
@@ -130,7 +168,9 @@ class Field extends React.Component {
                     value: "right"
                 }
                 break;
-            //-------------------------------
+            //---------------------------------
+            // Margin Above--------------------
+            //---------------------------------
             case "above0":
                 payload = {
                     index: this.props.index,
@@ -159,15 +199,87 @@ class Field extends React.Component {
                     value: 15
                 }
                 break;
+            case "textShadowToggle":
+                payload = {
+                    index: this.props.index,
+                    action: "textShadowToggle",
+                    value: !this.props.field.style.textShadow.enabled
+                }
+                break;
+            case "fieldShadowToggle":
+                payload = {
+                    index: this.props.index,
+                    action: "fieldShadowToggle",
+                    value: !this.props.field.style.fieldShadow.enabled
+                }
+                break;
         }
         this.props.update(payload);
     }
 
-
     render() {
+        let textShadow;
+        let fieldShadow;
 
-        let optionsStyle = {
-            textAlign: 'right'
+        // Handle dynamic inputs
+        // Text Shadow
+        if (this.props.field.style.textShadow.enabled === true) {
+            textShadow = <div>
+                <InputGroup className="mb-3">
+                    <InputGroup.Prepend>
+                        <InputGroup.Text id="inputGroup-sizing-default">Right</InputGroup.Text>
+                    </InputGroup.Prepend>
+                    <FormControl
+                        aria-label="Default"
+                        aria-describedby="inputGroup-sizing-default"
+                        onChange={this.updateTextShadowRight}
+                        placeholder={this.props.field.style.textShadow.right + "px"}
+                    />
+                </InputGroup>
+                <InputGroup className="mb-3">
+                    <InputGroup.Prepend>
+                        <InputGroup.Text id="inputGroup-sizing-default">Down</InputGroup.Text>
+                    </InputGroup.Prepend>
+                    <FormControl
+                        aria-label="Default"
+                        aria-describedby="inputGroup-sizing-default"
+                        onChange={this.updateTextShadowDown}
+                        placeholder={this.props.field.style.textShadow.down + "px"}
+                    />
+                </InputGroup>
+                <InputGroup className="mb-3">
+                    <InputGroup.Prepend>
+                        <InputGroup.Text id="inputGroup-sizing-default">Blur</InputGroup.Text>
+                    </InputGroup.Prepend>
+                    <FormControl
+                        aria-label="Default"
+                        aria-describedby="inputGroup-sizing-default"
+                        onChange={this.updateTextShadowBlur}
+                        placeholder={this.props.field.style.textShadow.blur + "px"}
+                    />
+                </InputGroup>
+                <InputGroup className="mb-3">
+                    <InputGroup.Prepend>
+                        <InputGroup.Text id="inputGroup-sizing-default">Color</InputGroup.Text>
+                    </InputGroup.Prepend>
+                    <FormControl
+                        aria-label="Default"
+                        aria-describedby="inputGroup-sizing-default"
+                        onChange={this.updateTextShadowColor}
+                        placeholder={this.props.field.style.textShadow.color}
+                    />
+                </InputGroup>
+            </div>;
+        } else {
+            textShadow = <div></div>;
+        }
+
+        if (this.props.field.style.fieldShadow.enabled === true) {
+            fieldShadow = <div>
+                <p>TRUE</p>
+            </div>;
+        } else {
+            fieldShadow = <div></div>;
         }
 
         return (
@@ -263,6 +375,24 @@ class Field extends React.Component {
                                 <div style={{ display: "inline-block" }}>
                                     {this.props.field.style.marginTop}px
                                 </div>
+                                <Form >
+                                    <Form.Check
+                                        type="checkbox"
+                                        id="textShadowToggle"
+                                        label="Text-Shadow"
+                                        onClick={this.updateFieldStyle}
+                                    />
+                                    {textShadow}
+                                </Form>
+                                <Form >
+                                    <Form.Check
+                                        type="checkbox"
+                                        id="fieldShadowToggle"
+                                        label="Field-Shadow"
+                                        onClick={this.updateFieldStyle}
+                                    />
+                                    {fieldShadow}
+                                </Form>
                             </Tab>
                         </Tabs>
                     </Card.Body>

@@ -55,10 +55,15 @@ class FieldPreview extends React.Component {
         }
 
         if (this.props.field.name === "textInput") {
-            label = this.props.field.label;
+            label = <label style={{
+                cursor: "pointer", textShadow: this.props.field.style.textShadow.right + "px " +
+                    this.props.field.style.textShadow.down + "px " +
+                    this.props.field.style.textShadow.blur + "px " +
+                    this.props.field.style.textShadow.color
+            }} >{this.props.field.label}</label>;
             input = <div><input type="text" style={{ width: "100%", cursor: "pointer" }} value={this.props.field.placeholder} disabled></input></div>
         } else if (this.props.field.name === "email") {
-            label = this.props.field.label;
+            label = <label style={{ cursor: "pointer" }}>{this.props.field.label}</label>;
             input = <div><input type="email" style={{ width: "100%", cursor: "pointer" }} value={this.props.field.placeholder} disabled></input></div>
         } else if (this.props.field.name === "button") {
             input = <button>{this.props.field.label}</button>
