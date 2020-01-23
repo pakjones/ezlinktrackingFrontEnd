@@ -44,7 +44,7 @@ class Forms extends React.Component {
                 fields2[payload.index] = fields2[payload.index - 1];
                 fields2[payload.index - 1] = temp;
 
-                this.setState({ fields: fields2 });
+                this.setState({ fields: fields2, activeField: this.state.activeField - 1 });
             }
         } else if (payload.action === "moveDown") {
             console.log("Trying to move down");
@@ -57,7 +57,7 @@ class Forms extends React.Component {
                 fields2[payload.index] = fields2[payload.index + 1];
                 fields2[payload.index + 1] = temp;
 
-                this.setState({ fields: fields2 });
+                this.setState({ fields: fields2, activeField: this.state.activeField + 1 });
             }
         } else if (payload.action === "setLabel") {
             let temp = this.state.fields;
