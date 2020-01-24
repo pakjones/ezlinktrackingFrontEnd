@@ -194,8 +194,12 @@ class Forms extends React.Component {
                 form += "<div>";
                 form += "<div style='width: 100%;'>";
                 form += "<div style='width: 100%; text-align: " + field.style.textAlign + ";'>"
-                form += "<label>" + field.label + "</label>";
-                form += "<div style='width: 100%;'><input name='" + field.label + "' value='" + field.placeholder + "' style='width: 100%;'></div>";
+                form += "<label style='text-shadow:" + field.style.textShadow.right + "px "
+                    + field.style.textShadow.down + "px "
+                    + field.style.textShadow.blur + "px "
+                    + field.style.textShadow.color +
+                    "'>" + field.label + "</label>";
+                form += "<div style='width: 100%;'><input name='" + field.label + "' placeholder='" + field.placeholder + "' style='width: 100%;'></div>";
                 form += "</div>";
                 form += "</div>";
                 form += "</div>";
@@ -208,7 +212,8 @@ class Forms extends React.Component {
 
         }
 
-        form += "</form>"
+        form += "</form>";
+        form += '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">';
 
         this.setState({ embedCode: form });
     }
