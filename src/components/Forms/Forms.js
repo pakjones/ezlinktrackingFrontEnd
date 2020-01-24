@@ -231,7 +231,7 @@ class Forms extends React.Component {
             <div className="container">
                 <br />
                 <div className="row">
-                    <div className="col-md-3">
+                    <div className="col-md-4" style={{ textAlign: "left" }}>
                         <Dropdown>
                             <Dropdown.Toggle variant="success" id="dropdown-basic">
                                 Add Field
@@ -244,7 +244,7 @@ class Forms extends React.Component {
                             </Dropdown.Menu>
                         </Dropdown>
                     </div>
-                    <div className="col-md-3">
+                    <div className="col-md-4" style={{ textAlign: "center" }}>
                         <Button variant="outline-success" onClick={this.handleSSShow}>
                             SharpSpring
                             </Button>
@@ -271,7 +271,7 @@ class Forms extends React.Component {
                             </Modal.Footer>
                         </Modal>
                     </div>
-                    <div className="col-md-3">
+                    <div className="col-md-4" style={{ textAlign: "right" }}>
                         <Button variant="secondary" onClick={this.ezlHandleShow}>
                             Embed Code
                         </Button>
@@ -294,7 +294,7 @@ class Forms extends React.Component {
                 </div>
                 <br />
                 <div className="row" style={{ marginLeft: '0px', paddingLeft: '0px' }}>
-                    <div className="col-md-6">
+                    <div className="col-md-6" style={{ padding: "0px" }}>
                         <Fields fields={this.state.fields} activeField={this.state.activeField} updateFields={this.updateFields} />
                     </div>
                     <div className="col-md-6">
