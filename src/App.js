@@ -3,6 +3,7 @@ import List from './components/list';
 import Docs from './components/Docs';
 import Forms from './components/Forms/Forms';
 import Nav from './components/Nav';
+import Contacts from './components/Contacts/Contacts';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -22,6 +23,10 @@ class App extends React.Component {
       display: false,
       page: 0
     };
+  }
+
+  login = () => {
+
   }
 
   handleIdChange = (e) => {
@@ -112,6 +117,30 @@ class App extends React.Component {
   setPage2 = () => {
     this.setState({ page: 2 });
   }
+  setPage3 = () => {
+    this.setState({ page: 3 });
+  }
+
+  logIn = (account, password) => {
+    let url = 'http://app.okrana.icu/account/login';
+
+    let xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+        let json = xhr.response;
+        console.log(xhr.response);
+      }
+    }
+
+    xhr.open('GET', url, true);
+    console.log(account, password);
+    let object = {
+      "email": account,
+      "password": password
+    }
+    xhr.send(object);
+  }
 
   render() {
 
@@ -125,7 +154,7 @@ class App extends React.Component {
     if (this.state.page === 0) {
       return (
         <div>
-          <Nav page={this.state.page} setPage0={this.setPage0} setPage1={this.setPage1} setPage2={this.setPage2} />
+          <Nav page={this.state.page} setPage0={this.setPage0} setPage1={this.setPage1} setPage2={this.setPage2} setPage3={this.setPage3} logIn={this.logIn} />
           <div className="jumbotron text-center">
             <h1>EZLinktracking.com</h1>
             <p>Easy - Free - Link Tracking</p>
@@ -164,15 +193,22 @@ class App extends React.Component {
     } else if (this.state.page === 1) {
       return (
         <div>
-          <Nav page={this.state.page} setPage0={this.setPage0} setPage1={this.setPage1} setPage2={this.setPage2} />
+          <Nav page={this.state.page} setPage0={this.setPage0} setPage1={this.setPage1} setPage2={this.setPage2} setPage3={this.setPage3} logIn={this.logIn} />
           <Docs />
         </div>
       );
     } else if (this.state.page === 2) {
       return (
         <div>
-          <Nav page={this.state.page} setPage0={this.setPage0} setPage1={this.setPage1} setPage2={this.setPage2} />
+          <Nav page={this.state.page} setPage0={this.setPage0} setPage1={this.setPage1} setPage2={this.setPage2} setPage3={this.setPage3} />
           <Forms />
+        </div>
+      )
+    } else if (this.state.page === 3) {
+      return (
+        <div>
+          <Nav page={this.state.page} setPage0={this.setPage0} setPage1={this.setPage1} setPage2={this.setPage2} setPage3={this.setPage3} />
+          <Contacts />
         </div>
       )
     }
