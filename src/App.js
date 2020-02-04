@@ -14,6 +14,7 @@ class App extends React.Component {
     this.state = {
       loggedIn: false,
       account: "",
+      password: "",
       accountName: "",
       id: "",
       redirect: "",
@@ -24,10 +25,6 @@ class App extends React.Component {
       display: false,
       page: 0
     };
-  }
-
-  login = () => {
-
   }
 
   handleIdChange = (e) => {
@@ -126,6 +123,13 @@ class App extends React.Component {
     this.setState({ loggedIn: value });
   }
 
+  setAccount = (account) => {
+    this.setState({ account });
+  }
+  setPassword = (password) => {
+    this.setState({ password });
+  }
+
   render() {
 
     let createBtnStyle = () => {
@@ -146,7 +150,8 @@ class App extends React.Component {
             logIn={this.logIn}
             loggedIn={this.state.loggedIn}
             setLoggedIn={this.setLoggedIn}
-            setLoggedOut={this.setLoggedIn} />
+            setAccount={this.setAccount}
+            setPassword={this.setPassword} />
           <div className="jumbotron text-center">
             <h1>EZLinktracking.com</h1>
             <p>Easy - Free - Link Tracking</p>
@@ -185,7 +190,7 @@ class App extends React.Component {
     } else if (this.state.page === 1) {
       return (
         <div>
-          <Nav page={this.state.page} setPage0={this.setPage0} setPage1={this.setPage1} setPage2={this.setPage2} setPage3={this.setPage3} setLoggedIn={this.setLoggedIn} />
+          <Nav page={this.state.page} setPage0={this.setPage0} setPage1={this.setPage1} setPage2={this.setPage2} setPage3={this.setPage3} loggedIn={this.state.loggedIn} />
           <Docs />
         </div>
       );

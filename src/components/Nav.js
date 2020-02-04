@@ -24,6 +24,12 @@ class Nav extends React.Component {
         this.props.logIn(this.state.account, this.state.password, this.props.setLoggedIn);
     }
 
+    logOut = () => {
+        this.props.setLoggedIn(false);
+        this.props.setAccount("");
+        this.props.setPassword("");
+    }
+
     setPage = (page) => {
 
         for (let i = 0; i < this.state.pages.length; i++) {
@@ -42,7 +48,7 @@ class Nav extends React.Component {
 
         let logged = <div></div>;
         if (this.props.loggedIn === true) {
-            logged = <Button variant="danger" type="submit" >Log Out</Button>
+            logged = <Button variant="danger" type="submit" onClick={this.logOut}>Log Out</Button>
         } else {
             logged = <Button className="btn btn-success" style={{ float: "right" }} onClick={this.handleShow}>Log In</Button>
         }
@@ -63,6 +69,8 @@ class Nav extends React.Component {
                     handleClose={this.handleClose}
                     handleAccountChange={this.handleAccountChange}
                     handlePasswordChange={this.handlePasswordChange}
+                    setAccount={this.props.setAccount}
+                    setPassword={this.props.setPassword}
                     account={this.state.account}
                     password={this.state.password}
                     setLoggedIn={this.props.setLoggedIn} />

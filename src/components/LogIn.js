@@ -13,9 +13,8 @@ class LogIn extends React.Component {
         super(props);
         this.state = {
             modalShow: false,
-            account: "",
-            password: "",
-            button: <Button variant="success" type="submit" onClick={this.logInHandler}>Log In</Button>
+            button: <Button variant="success" type="submit" onClick={this.logInHandler}>Log In</Button>,
+            create: <Button variant="info" type="submit" style={{ marginLeft: "10px" }} onClick={this.createHandler}>Create</Button>
         };
     }
     handleClose = () => this.setState({ modalShow: false });
@@ -24,13 +23,44 @@ class LogIn extends React.Component {
     handleAccountChange = (e) => this.setState({ account: e.target.value });
     handlePasswordChange = (e) => this.setState({ password: e.target.value });
 
+    createHandler = () => {
+        if (this.create(this.props.setLoggedIn, this.setButton, this.props.handleClose)) {
+            this.props.setAccount(this.state.account);
+            this.props.setPassword(this.state.password);
+        }
+
+    }
     logInHandler = () => {
-        this.logIn(this.props.setLoggedIn, this.setButton, this.props.handleClose);
+        if (this.logIn(this.props.setLoggedIn, this.setButton, this.props.handleClose) === true) {
+            this.props.setAccount(this.state.account);
+            this.props.setPassword(this.state.password);
+        }
+    }
+
+    setCreateButton = (type) => {
+        if (type === "login") {
+            this.setState({ create: <Button variant="info" type="submit" onClick={this.logInHandler}>Create</Button> })
+        } else if (type === "loading") {
+            this.setState({
+                create: <Button variant="info" disabled>
+                    <Spinner
+                        as="span"
+                        animation="border"
+                        size="sm"
+                        role="status"
+                        aria-hidden="true"
+                    />
+                    <span className="sr-only">Loading...</span>
+                </Button>
+            })
+        } else if (type === "logout") {
+            this.setState({ create: <Button variant="danger" type="submit" >Log Out</Button> })
+        }
     }
 
     setButton = (type) => {
         if (type === "login") {
-            this.state.setState({ button: <Button variant="success" type="submit" onClick={this.logInHandler}>Log In</Button> })
+            this.setState({ button: <Button variant="success" type="submit" onClick={this.logInHandler}>Log In</Button> })
         } else if (type === "loading") {
             this.setState({
                 button: <Button variant="success" disabled>
@@ -49,6 +79,32 @@ class LogIn extends React.Component {
         }
     }
 
+    create = (setLoggedIn, setButton, close) => {
+        let url = 'http://app.okrana.icu/account';
+
+        setButton("loading");
+
+        axios.post(url, {
+            "email": this.props.account,
+            "password": this.props.password
+        })
+            .then(function (response) {
+                console.log(response);
+                if (response.status === 200) {
+                    setLoggedIn(true);
+                    close();
+                    return true;
+                } else {
+                    return false;
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+                setButton("login");
+                return false;
+            });
+    }
+
     logIn = (setLoggedIn, setButton, close) => {
         let url = 'http://app.okrana.icu/account/login';
 
@@ -63,11 +119,15 @@ class LogIn extends React.Component {
                 if (response.status === 200) {
                     setLoggedIn(true);
                     close();
+                    return true;
+                } else {
+                    return false;
                 }
             })
             .catch(function (error) {
                 console.log(error);
                 setButton("login");
+                return false;
             });
     }
 
@@ -94,11 +154,9 @@ class LogIn extends React.Component {
                     </Form.Group>
 
                     {this.state.button}
+                    {this.state.create}
 
                 </Modal.Body>
-                <Modal.Footer>
-
-                </Modal.Footer>
             </Modal >
         )
 
