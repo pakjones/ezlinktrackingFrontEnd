@@ -122,7 +122,11 @@ class App extends React.Component {
     this.setState({ page: 3 });
   }
 
-  logIn = (account, password) => {
+  setLoggedIn = (value) => {
+    this.setState({ loggedIn: value });
+  }
+
+  /*logIn = (account, password, setLoggedIn) => {
     let url = 'http://app.okrana.icu/account/login';
 
     axios.post(url, {
@@ -131,12 +135,14 @@ class App extends React.Component {
     })
       .then(function (response) {
         console.log(response);
+        if (response.status === 200) {
+          setLoggedIn();
+        }
       })
       .catch(function (error) {
         console.log(error);
       });
-
-  }
+  }*/
 
   render() {
 
@@ -150,7 +156,15 @@ class App extends React.Component {
     if (this.state.page === 0) {
       return (
         <div>
-          <Nav page={this.state.page} setPage0={this.setPage0} setPage1={this.setPage1} setPage2={this.setPage2} setPage3={this.setPage3} logIn={this.logIn} />
+          <Nav page={this.state.page}
+            setPage0={this.setPage0}
+            setPage1={this.setPage1}
+            setPage2={this.setPage2}
+            setPage3={this.setPage3}
+            logIn={this.logIn}
+            loggedIn={this.state.loggedIn}
+            setLoggedIn={this.setLoggedIn}
+            setLoggedOut={this.setLoggedIn} />
           <div className="jumbotron text-center">
             <h1>EZLinktracking.com</h1>
             <p>Easy - Free - Link Tracking</p>
@@ -189,21 +203,21 @@ class App extends React.Component {
     } else if (this.state.page === 1) {
       return (
         <div>
-          <Nav page={this.state.page} setPage0={this.setPage0} setPage1={this.setPage1} setPage2={this.setPage2} setPage3={this.setPage3} logIn={this.logIn} />
+          <Nav page={this.state.page} setPage0={this.setPage0} setPage1={this.setPage1} setPage2={this.setPage2} setPage3={this.setPage3} setLoggedIn={this.setLoggedIn} />
           <Docs />
         </div>
       );
     } else if (this.state.page === 2) {
       return (
         <div>
-          <Nav page={this.state.page} setPage0={this.setPage0} setPage1={this.setPage1} setPage2={this.setPage2} setPage3={this.setPage3} />
+          <Nav page={this.state.page} setPage0={this.setPage0} setPage1={this.setPage1} setPage2={this.setPage2} setPage3={this.setPage3} loggedIn={this.state.loggedIn} />
           <Forms />
         </div>
       )
     } else if (this.state.page === 3) {
       return (
         <div>
-          <Nav page={this.state.page} setPage0={this.setPage0} setPage1={this.setPage1} setPage2={this.setPage2} setPage3={this.setPage3} />
+          <Nav page={this.state.page} setPage0={this.setPage0} setPage1={this.setPage1} setPage2={this.setPage2} setPage3={this.setPage3} loggedIn={this.state.loggedIn} />
           <Contacts />
         </div>
       )
