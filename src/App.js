@@ -6,6 +6,7 @@ import Nav from './components/Nav';
 import Contacts from './components/Contacts/Contacts';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+const axios = require('axios');
 
 class App extends React.Component {
   constructor(props) {
@@ -124,22 +125,17 @@ class App extends React.Component {
   logIn = (account, password) => {
     let url = 'http://app.okrana.icu/account/login';
 
-    let xhr = new XMLHttpRequest();
-
-    xhr.onreadystatechange = () => {
-      if (xhr.readyState === XMLHttpRequest.DONE) {
-        let json = xhr.response;
-        console.log(xhr.response);
-      }
-    }
-
-    xhr.open('GET', url, true);
-    console.log(account, password);
-    let object = {
+    axios.post(url, {
       "email": account,
       "password": password
-    }
-    xhr.send(object);
+    })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
   }
 
   render() {
