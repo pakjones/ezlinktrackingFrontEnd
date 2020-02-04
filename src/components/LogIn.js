@@ -4,6 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
 import Form from 'react-bootstrap/Form';
+import Spinner from 'react-bootstrap/Spinner';
 
 const axios = require('axios');
 
@@ -13,7 +14,8 @@ class LogIn extends React.Component {
         this.state = {
             modalShow: false,
             account: "",
-            password: ""
+            password: "",
+            button: <Button variant="success" type="submit" onClick={this.logInHandler}>Log In</Button>
         };
     }
     handleClose = () => this.setState({ modalShow: false });
@@ -23,11 +25,34 @@ class LogIn extends React.Component {
     handlePasswordChange = (e) => this.setState({ password: e.target.value });
 
     logInHandler = () => {
-        this.logIn(this.props.setLoggedIn);
+        this.logIn(this.props.setLoggedIn, this.setButton, this.props.handleClose);
     }
 
-    logIn = (setLoggedIn) => {
+    setButton = (type) => {
+        if (type === "login") {
+            this.state.setState({ button: <Button variant="success" type="submit" onClick={this.logInHandler}>Log In</Button> })
+        } else if (type === "loading") {
+            this.setState({
+                button: <Button variant="success" disabled>
+                    <Spinner
+                        as="span"
+                        animation="border"
+                        size="sm"
+                        role="status"
+                        aria-hidden="true"
+                    />
+                    <span className="sr-only">Loading...</span>
+                </Button>
+            })
+        } else if (type === "logout") {
+            this.setState({ button: <Button variant="danger" type="submit" >Log Out</Button> })
+        }
+    }
+
+    logIn = (setLoggedIn, setButton, close) => {
         let url = 'http://app.okrana.icu/account/login';
+
+        setButton("loading");
 
         axios.post(url, {
             "email": this.props.account,
@@ -37,10 +62,12 @@ class LogIn extends React.Component {
                 console.log(response);
                 if (response.status === 200) {
                     setLoggedIn(true);
+                    close();
                 }
             })
             .catch(function (error) {
                 console.log(error);
+                setButton("login");
             });
     }
 
@@ -65,9 +92,8 @@ class LogIn extends React.Component {
                         <Form.Label>Password</Form.Label>
                         <Form.Control placeholder="Password" onChange={this.props.handlePasswordChange} value={this.props.password} />
                     </Form.Group>
-                    <Button variant="success" type="submit" onClick={this.logInHandler}>
-                        Log In
-                                </Button>
+
+                    {this.state.button}
 
                 </Modal.Body>
                 <Modal.Footer>

@@ -126,24 +126,6 @@ class App extends React.Component {
     this.setState({ loggedIn: value });
   }
 
-  /*logIn = (account, password, setLoggedIn) => {
-    let url = 'http://app.okrana.icu/account/login';
-
-    axios.post(url, {
-      "email": account,
-      "password": password
-    })
-      .then(function (response) {
-        console.log(response);
-        if (response.status === 200) {
-          setLoggedIn();
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }*/
-
   render() {
 
     let createBtnStyle = () => {

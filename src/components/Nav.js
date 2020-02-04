@@ -1,9 +1,5 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import InputGroup from 'react-bootstrap/InputGroup';
-import FormControl from 'react-bootstrap/FormControl';
-import Form from 'react-bootstrap/Form';
 import LogIn from './LogIn';
 
 class Nav extends React.Component {
@@ -46,7 +42,7 @@ class Nav extends React.Component {
 
         let logged = <div></div>;
         if (this.props.loggedIn === true) {
-            logged = <div>{this.props.account}</div>
+            logged = <Button variant="danger" type="submit" >Log Out</Button>
         } else {
             logged = <Button className="btn btn-success" style={{ float: "right" }} onClick={this.handleShow}>Log In</Button>
         }
