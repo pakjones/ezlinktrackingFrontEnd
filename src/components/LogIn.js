@@ -14,7 +14,8 @@ class LogIn extends React.Component {
         this.state = {
             modalShow: false,
             button: <Button variant="success" type="submit" onClick={this.logInHandler}>Log In</Button>,
-            create: <Button variant="info" type="submit" style={{ marginLeft: "10px" }} onClick={this.createHandler}>Create</Button>
+            create: <Button variant="info" type="submit" style={{ marginLeft: "10px" }} onClick={this.createHandler}>Create</Button>,
+            statusText: ""
         };
     }
     handleClose = () => this.setState({ modalShow: false });
@@ -89,12 +90,15 @@ class LogIn extends React.Component {
             "password": this.props.password
         })
             .then(function (response) {
-                console.log(response);
+                console.log(response.data);
                 if (response.status === 200) {
                     setLoggedIn(true);
+                    setButton("login");
                     close();
                     return true;
                 } else {
+                    console.log(response);
+                    this.setState({statusText: response.text});
                     return false;
                 }
             })
@@ -118,9 +122,11 @@ class LogIn extends React.Component {
                 console.log(response);
                 if (response.status === 200) {
                     setLoggedIn(true);
+                    setButton("login");
                     close();
                     return true;
                 } else {
+                    console.log(response);
                     return false;
                 }
             })
@@ -150,7 +156,8 @@ class LogIn extends React.Component {
 
                     <Form.Group controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control placeholder="Password" onChange={this.props.handlePasswordChange} value={this.props.password} />
+                        <Form.Control type="password" placeholder="Password" onChange={this.props.handlePasswordChange} value={this.props.password} />
+                        <p style={{ color: "red" }}>{this.state.statusText}</p>
                     </Form.Group>
 
                     {this.state.button}
