@@ -17,6 +17,8 @@ class App extends React.Component {
       password: "",
       accountName: "",
       id: "",
+      accountObject: "",
+      contacts: [],
       redirect: "",
       createLink: "",
       getLink: "",
@@ -119,8 +121,20 @@ class App extends React.Component {
     this.setState({ page: 3 });
   }
 
-  setLoggedIn = (value) => {
+  setLoggedIn = (value, object) => {
     this.setState({ loggedIn: value });
+    if (value === true) {
+      if (object) {
+        this.setState({ accountObject: object });
+        let contacts = object.contacts;
+        this.setState({ contacts: contacts });
+      }
+    } else {
+      this.setState({ account: ""});
+      this.setState({ password: "" });
+      this.setState({ contacts: [] });
+    }
+    
   }
 
   setAccount = (account) => {
@@ -190,22 +204,25 @@ class App extends React.Component {
     } else if (this.state.page === 1) {
       return (
         <div>
-          <Nav page={this.state.page} setPage0={this.setPage0} setPage1={this.setPage1} setPage2={this.setPage2} setPage3={this.setPage3} loggedIn={this.state.loggedIn} />
+          <Nav page={this.state.page} setPage0={this.setPage0} setPage1={this.setPage1} setPage2={this.setPage2} setPage3={this.setPage3} 
+          loggedIn={this.state.loggedIn} setLoggedIn={this.setLoggedIn}/>
           <Docs />
         </div>
       );
     } else if (this.state.page === 2) {
       return (
         <div>
-          <Nav page={this.state.page} setPage0={this.setPage0} setPage1={this.setPage1} setPage2={this.setPage2} setPage3={this.setPage3} loggedIn={this.state.loggedIn} />
+          <Nav page={this.state.page} setPage0={this.setPage0} setPage1={this.setPage1} setPage2={this.setPage2} setPage3={this.setPage3} 
+          loggedIn={this.state.loggedIn} setLoggedIn={this.setLoggedIn}/>
           <Forms />
         </div>
       )
     } else if (this.state.page === 3) {
       return (
         <div>
-          <Nav page={this.state.page} setPage0={this.setPage0} setPage1={this.setPage1} setPage2={this.setPage2} setPage3={this.setPage3} loggedIn={this.state.loggedIn} />
-          <Contacts />
+          <Nav page={this.state.page} setPage0={this.setPage0} setPage1={this.setPage1} setPage2={this.setPage2} setPage3={this.setPage3} 
+          loggedIn={this.state.loggedIn} setLoggedIn={this.setLoggedIn}/>
+          <Contacts contacts={this.state.contacts}/>
         </div>
       )
     }

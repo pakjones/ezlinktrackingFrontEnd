@@ -26,8 +26,6 @@ class Nav extends React.Component {
 
     logOut = () => {
         this.props.setLoggedIn(false);
-        this.props.setAccount("");
-        this.props.setPassword("");
     }
 
     setPage = (page) => {

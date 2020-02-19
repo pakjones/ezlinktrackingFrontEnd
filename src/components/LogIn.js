@@ -121,7 +121,8 @@ class LogIn extends React.Component {
             .then(function (response) {
                 console.log(response);
                 if (response.status === 200) {
-                    setLoggedIn(true);
+                    setLoggedIn(true, response.data);
+                    console.log(response.data);
                     setButton("login");
                     close();
                     return true;

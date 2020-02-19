@@ -10,7 +10,7 @@ class Contact extends React.Component {
     render() {
         return (
             <div>
-                <span>{this.props.contact.name}</span>
+                <span>{this.props.contact.email}</span>
             </div>
         )
     }
