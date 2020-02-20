@@ -144,8 +144,36 @@ class App extends React.Component {
   setAccount = (account) => {
     this.setState({ account });
   }
+  setAccountObject = (obj) => {
+    this.setState({ accountObject: obj });
+  }
   setPassword = (password) => {
     this.setState({ password });
+  }
+
+  handleGetAccountInfo = () => {
+    this.getAccountInfo(this.setAccountObject);
+  }
+
+  getAccountInfo = (setAccount) => {
+    let url = 'http://app.okrana.icu/account/login';
+
+        axios.post(url, {
+            "email": this.state.accountObject.email,
+            "password": this.state.accountObject.password
+        })
+            .then(function (response) {
+                console.log(response);
+                if (response.status === 200) {
+                    setAccount(response.data);
+                    return true;
+                } else {
+                    return false;
+                }
+            })
+            .catch(function (error) {
+                return false;
+            });
   }
 
   render() {
@@ -226,7 +254,8 @@ class App extends React.Component {
         <div>
           <Nav page={this.state.page} setPage0={this.setPage0} setPage1={this.setPage1} setPage2={this.setPage2} setPage3={this.setPage3} 
           loggedIn={this.state.loggedIn} setLoggedIn={this.setLoggedIn}/>
-          <Contacts contacts={this.state.contacts}/>
+          <Contacts contacts={this.state.accountObject.contacts} accountName={this.state.accountObject.email}
+           password={this.state.accountObject.password} getAccountInfo={this.handleGetAccountInfo}/>
         </div>
       )
     }

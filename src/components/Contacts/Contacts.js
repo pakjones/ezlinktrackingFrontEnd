@@ -59,20 +59,25 @@ class Contacts extends React.Component {
     }
 
     addContactHandler = () => {
-        this.addContact(this.setButton, this.handleClose, this.setStatusText)
+        let payload = {
+            account: this.props.account,
+            password: this.props.password
+        }
+        this.addContact(this.setButton, this.handleClose, this.setStatusText, this.props.getAccountInfo)
     }
 
-    addContact = (setButton, handleClose, setStatusText) => {
+    addContact = (setButton, handleClose, setStatusText, getAccountInfo) => {
         let url = 'http://app.okrana.icu/contact/create';
 
         setButton("loading");
 
+
         axios.post(url, {
-            "email": this.props.account,
-            "password": this.props.password,
-            "contact": {
-                "email": this.state.newContactEmail,
-                "name": this.state.newContactName
+            account: this.props.accountName,
+            password: this.props.password,
+            contact: {
+                email: this.state.newContactEmail,
+                name: this.state.newContactName
             }
         })
             .then(function (response) {
@@ -81,6 +86,7 @@ class Contacts extends React.Component {
                     console.log(response.data);
                     setButton("rest");
                     handleClose();
+                    getAccountInfo(response.data);
                     return true;
                 } else {
                     console.log(response);
