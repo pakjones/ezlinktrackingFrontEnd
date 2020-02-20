@@ -1,7 +1,7 @@
 import React from 'react';
 import List from './components/list';
 import Docs from './components/Docs';
-import Forms from './components/Forms/Forms';
+import FormList from './components/Forms/FormList';
 import Nav from './components/Nav';
 import Contacts from './components/Contacts/Contacts';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -19,6 +19,7 @@ class App extends React.Component {
       id: "",
       accountObject: "",
       contacts: [],
+      forms: [],
       redirect: "",
       createLink: "",
       getLink: "",
@@ -127,12 +128,15 @@ class App extends React.Component {
       if (object) {
         this.setState({ accountObject: object });
         let contacts = object.contacts;
-        this.setState({ contacts: contacts });
+        let forms = object.forms;
+        this.setState({ contacts });
+        this.setState({ forms })
       }
     } else {
       this.setState({ account: ""});
       this.setState({ password: "" });
       this.setState({ contacts: [] });
+      this.setState({ forms: [] });
     }
     
   }
@@ -214,7 +218,7 @@ class App extends React.Component {
         <div>
           <Nav page={this.state.page} setPage0={this.setPage0} setPage1={this.setPage1} setPage2={this.setPage2} setPage3={this.setPage3} 
           loggedIn={this.state.loggedIn} setLoggedIn={this.setLoggedIn}/>
-          <Forms />
+          <FormList forms={this.state.forms}/>
         </div>
       )
     } else if (this.state.page === 3) {

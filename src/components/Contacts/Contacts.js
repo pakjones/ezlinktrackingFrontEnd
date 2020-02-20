@@ -1,6 +1,7 @@
 import React from 'react';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Contact from './Contact';
+import ListGroupItem from 'react-bootstrap/ListGroupItem';
 
 class Contacts extends React.Component {
     constructor(props) {
@@ -22,6 +23,7 @@ class Contacts extends React.Component {
                     {
                         array
                     }
+                    <ListGroupItem></ListGroupItem>
                 </ListGroup>
             )
 
