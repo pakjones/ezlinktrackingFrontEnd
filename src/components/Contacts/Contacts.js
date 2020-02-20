@@ -104,7 +104,7 @@ class Contacts extends React.Component {
     }
 
     render() {
-        if (this.props.contacts && this.props.contacts.length > 0) {
+        if (this.props.loggedIn === true) {
             let array = [];
 
             for (let i = 0; i < this.props.contacts.length; i++) {
