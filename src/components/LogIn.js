@@ -25,17 +25,21 @@ class LogIn extends React.Component {
     handlePasswordChange = (e) => this.setState({ password: e.target.value });
 
     createHandler = () => {
-        if (this.create(this.props.setLoggedIn, this.setButton, this.props.handleClose)) {
+        if (this.create(this.props.setLoggedIn, this.setButton, this.props.handleClose, this.setStatusText)) {
             this.props.setAccount(this.state.account);
             this.props.setPassword(this.state.password);
         }
 
     }
     logInHandler = () => {
-        if (this.logIn(this.props.setLoggedIn, this.setButton, this.props.handleClose) === true) {
+        if (this.logIn(this.props.setLoggedIn, this.setButton, this.props.handleClose, this.setStatusText) === true) {
             this.props.setAccount(this.state.account);
             this.props.setPassword(this.state.password);
         }
+    }
+
+    setStatusText = (text) => {
+        this.setState({ statusText: text });
     }
 
     setCreateButton = (type) => {
@@ -80,7 +84,7 @@ class LogIn extends React.Component {
         }
     }
 
-    create = (setLoggedIn, setButton, close) => {
+    create = (setLoggedIn, setButton, close, setStatusText) => {
         let url = 'http://app.okrana.icu/account';
 
         setButton("loading");
@@ -98,18 +102,19 @@ class LogIn extends React.Component {
                     return true;
                 } else {
                     console.log(response);
-                    this.setState({statusText: response.text});
+                    setStatusText(response.text);
                     return false;
                 }
             })
             .catch(function (error) {
-                console.log(error);
+                console.log(error.response.data);
                 setButton("login");
+                setStatusText(error.response.data);
                 return false;
             });
     }
 
-    logIn = (setLoggedIn, setButton, close) => {
+    logIn = (setLoggedIn, setButton, close, setStatusText) => {
         let url = 'http://app.okrana.icu/account/login';
 
         setButton("loading");
@@ -127,6 +132,7 @@ class LogIn extends React.Component {
                     close();
                     return true;
                 } else {
+                    setStatusText(response.text);
                     console.log(response);
                     return false;
                 }
@@ -134,6 +140,7 @@ class LogIn extends React.Component {
             .catch(function (error) {
                 console.log(error);
                 setButton("login");
+                setStatusText(error.response.data);
                 return false;
             });
     }
