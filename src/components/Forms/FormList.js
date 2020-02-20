@@ -12,13 +12,19 @@ class FormList extends React.Component {
         };
     }
 
+    setSelectedForm = (index) => {
+        this.setState({ selectedForm: index });
+    }
+
     render() {
         if (this.state.selectedForm === "") {
             if (this.props.forms && this.props.forms.length > 0) {
                 let array = [];
     
                 for (let i = 0; i < this.props.forms.length; i++) {
-                    array.push(<ListGroup.Item key={i}><FormListItem form={this.props.forms[i]} key={i} /></ListGroup.Item>)
+                    array.push(<ListGroup.Item key={i}>
+                                    <FormListItem form={this.props.forms[i]} key={i} index={i} setSelectedForm={this.setSelectedForm}/>
+                                </ListGroup.Item>)
                 }
     
                 return (
