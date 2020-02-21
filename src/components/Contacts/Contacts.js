@@ -24,18 +24,19 @@ class Contacts extends React.Component {
 
     setButton = (buttonState) => {
         if (buttonState === "rest") {
-        this.setState({ addButton: <Button variant="success" onClick={this.addContactHandler}>Create</Button> });
+            this.setState({ addButton: <Button variant="success" onClick={this.addContactHandler}>Create</Button> });
         } else if (buttonState === "loading") {
-            this.setState({ addButton: <Button variant="success" disabled>
-            <Spinner
-                as="span"
-                animation="border"
-                size="sm"
-                role="status"
-                aria-hidden="true"
-            />
-            <span className="sr-only">Loading...</span>
-            </Button>
+            this.setState({
+                addButton: <Button variant="success" disabled>
+                    <Spinner
+                        as="span"
+                        animation="border"
+                        size="sm"
+                        role="status"
+                        aria-hidden="true"
+                    />
+                    <span className="sr-only">Loading...</span>
+                </Button>
             });
         }
     }
@@ -107,8 +108,10 @@ class Contacts extends React.Component {
         if (this.props.loggedIn === true) {
             let array = [];
 
-            for (let i = 0; i < this.props.contacts.length; i++) {
-                array.push(<ListGroup.Item key={i}><Contact contact={this.props.contacts[i]} key={i} /></ListGroup.Item>)
+            if (this.props.contacts) {
+                for (let i = 0; i < this.props.contacts.length; i++) {
+                    array.push(<ListGroup.Item key={i}><Contact contact={this.props.contacts[i]} key={i} /></ListGroup.Item>)
+                }
             }
 
             return (
@@ -138,8 +141,8 @@ class Contacts extends React.Component {
                                 <p style={{ color: "red" }}>{this.state.statusText}</p>
                             </Form.Group>
 
-                            
-                        {this.state.addButton}
+
+                            {this.state.addButton}
                         </Modal.Body>
                     </Modal >
                 </div>
