@@ -58,6 +58,7 @@ class Nav extends React.Component {
                         <li className={this.state.pages[0]}><a className="nav-link" onClick={this.props.setPage0}>Home</a></li>
                         <li className={this.state.pages[3]}><a className="nav-link" onClick={this.props.setPage3}>Contacts</a></li>
                         <li className={this.state.pages[2]}><a className="nav-link" onClick={this.props.setPage2}>Forms</a></li>
+                        <li className={this.state.pages[4]}><a className="nav-link" onClick={this.props.setPage4}>Endpoints</a></li>
                         <li className={this.state.pages[1]}><a className="nav-link" onClick={this.props.setPage1}>Info</a></li>
                     </ul>
                     {logged}

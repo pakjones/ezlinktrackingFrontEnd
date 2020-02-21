@@ -4,6 +4,7 @@ import Docs from './components/Docs';
 import FormList from './components/Forms/FormList';
 import Nav from './components/Nav';
 import Contacts from './components/Contacts/Contacts';
+import Endpoints from './components/Endpoints/Endpoints';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const axios = require('axios');
@@ -121,6 +122,9 @@ class App extends React.Component {
   setPage3 = () => {
     this.setState({ page: 3 });
   }
+  setPage4 = () => {
+    this.setState({ page: 4 });
+  }
 
   setLoggedIn = (value, object) => {
     this.setState({ loggedIn: value });
@@ -193,6 +197,7 @@ class App extends React.Component {
             setPage1={this.setPage1}
             setPage2={this.setPage2}
             setPage3={this.setPage3}
+            setPage4={this.setPage4}
             logIn={this.logIn}
             loggedIn={this.state.loggedIn}
             setLoggedIn={this.setLoggedIn}
@@ -237,7 +242,7 @@ class App extends React.Component {
       return (
         <div>
           <Nav page={this.state.page} setPage0={this.setPage0} setPage1={this.setPage1} setPage2={this.setPage2} setPage3={this.setPage3} 
-          loggedIn={this.state.loggedIn} setLoggedIn={this.setLoggedIn}/>
+          setPage4={this.setPage4} loggedIn={this.state.loggedIn} setLoggedIn={this.setLoggedIn}/>
           <Docs />
         </div>
       );
@@ -245,7 +250,7 @@ class App extends React.Component {
       return (
         <div>
           <Nav page={this.state.page} setPage0={this.setPage0} setPage1={this.setPage1} setPage2={this.setPage2} setPage3={this.setPage3} 
-          loggedIn={this.state.loggedIn} setLoggedIn={this.setLoggedIn}/>
+          setPage4={this.setPage4} loggedIn={this.state.loggedIn} setLoggedIn={this.setLoggedIn}/>
           <FormList forms={this.state.forms}/>
         </div>
       )
@@ -253,9 +258,17 @@ class App extends React.Component {
       return (
         <div>
           <Nav page={this.state.page} setPage0={this.setPage0} setPage1={this.setPage1} setPage2={this.setPage2} setPage3={this.setPage3} 
-          loggedIn={this.state.loggedIn} setLoggedIn={this.setLoggedIn}/>
+          setPage4={this.setPage4} loggedIn={this.state.loggedIn} setLoggedIn={this.setLoggedIn}/>
           <Contacts contacts={this.state.accountObject.contacts} accountName={this.state.accountObject.email}
            password={this.state.accountObject.password} getAccountInfo={this.handleGetAccountInfo} loggedIn={this.state.loggedIn}/>
+        </div>
+      )
+    } else if (this.state.page === 4) {
+      return (
+        <div>
+          <Nav page={this.state.page} setPage0={this.setPage0} setPage1={this.setPage1} setPage2={this.setPage2} setPage3={this.setPage3} 
+          setPage4={this.setPage4} loggedIn={this.state.loggedIn} setLoggedIn={this.setLoggedIn}/>
+          <Endpoints />
         </div>
       )
     }
