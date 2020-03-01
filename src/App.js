@@ -2,6 +2,7 @@ import React from 'react';
 import List from './components/list';
 import Docs from './components/Docs';
 import FormList from './components/Forms/FormList';
+import Forms from './components/Forms/Forms';
 import Nav from './components/Nav';
 import Contacts from './components/Contacts/Contacts';
 import Endpoints from './components/Endpoints/Endpoints';
@@ -251,7 +252,8 @@ class App extends React.Component {
         <div>
           <Nav page={this.state.page} setPage0={this.setPage0} setPage1={this.setPage1} setPage2={this.setPage2} setPage3={this.setPage3} 
           setPage4={this.setPage4} loggedIn={this.state.loggedIn} setLoggedIn={this.setLoggedIn}/>
-          <FormList forms={this.state.forms}/>
+          {/*<FormList forms={this.state.forms}/>*/}
+          <Forms />
         </div>
       )
     } else if (this.state.page === 3) {
